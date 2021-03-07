@@ -1,0 +1,35 @@
+import { useState } from "react";
+import Router from "next/router";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+export const SearchArea = () => {
+  const [value, setValue] = useState<string>("");
+  const onPushResult = () => {
+    if (value === "") {
+      return;
+    }
+    Router.push({
+      pathname: "/posts/result/",
+      query: { s: value },
+    });
+  };
+  return (
+    <div className="sidebar_container">
+      <p className="sidebar_title">ブログ内の記事を検索する</p>
+      <input
+        type="text"
+        placeholder="サイト内検索"
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <button
+        onClick={() => {
+          onPushResult();
+        }}
+      >
+        <div className="h-4 w-4 ml-2">
+          <FontAwesomeIcon icon={faSearch} size="xs" />
+        </div>
+      </button>
+    </div>
+  );
+};
