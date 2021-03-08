@@ -67,8 +67,8 @@ const Post = ({
               {post.category[0] && (
                 <li>
                   <Link
-                    href="/posts/[category]"
-                    as={`/posts/${post.categoryPath[0]}`}
+                    href="/posts/category/[category]"
+                    as={`/posts/category/${post.categoryPath[0]}`}
                   >
                     <a>{post.category[0]}</a>
                   </Link>
@@ -78,8 +78,8 @@ const Post = ({
               {post.category[1] && (
                 <li>
                   <Link
-                    href="/posts/[category]"
-                    as={`/posts/${post.categoryPath[1]}`}
+                    href="/posts/category/[categoryContainer]/[category]"
+                    as={`/posts/category/${post.categoryPath[0]}/${post.categoryPath[1]}`}
                   >
                     <a>{post.category[1]}</a>
                   </Link>
@@ -89,8 +89,8 @@ const Post = ({
               {post.category[2] && (
                 <li>
                   <Link
-                    href="/posts/[category]"
-                    as={`/posts/${post.categoryPath[2]}`}
+                    href="/posts/category/[category]"
+                    as={`/posts/category/${post.categoryPath[2]}`}
                   >
                     <a>{post.category[2]}</a>
                   </Link>
@@ -159,11 +159,14 @@ export const getStaticProps = async ({
   //メイン投稿取得
   const post = getPostBySlug(params.slug);
   const content = await markdownTohtml(post.content);
-  console.log("conte=", content);
+  /*console.log("conte=", content);
   //関連投稿取得
   console.log("befoSlug=", params.slug);
-  params.slug.pop();
-  console.log("aftSlug=", params.slug);
+  if (params.slug.length >= 2) {
+    params.slug.pop();
+  }
+
+  console.log("aftSlug=", params.slug);*/
   const items = getPostsByCategory(params.slug);
   const slicedItems = items.data.slice(0, 5);
   const relatedPosts = {

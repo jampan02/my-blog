@@ -52,27 +52,26 @@
   .history_nav a:hover {
     @apply border-b-2 border-gray-300 text-gray-300 !important;
   }
-  .mokuji {
-    @apply list-decimal bg-blue-100  rounded-lg px-20 py-4;
+
+  .main_contents div {
+    @apply list-decimal bg-blue-100  rounded-lg px-20 py-4 max-w-md m-auto;
   }
-  .mokuji p {
+  .main_contents div p {
     @apply text-center font-bold pb-0 text-gray-700 !important;
   }
-  .mokuji a {
+  .main_contents div a {
     @apply text-gray-700;
   }
-  .mokuji a:hover {
+  .main_contents div a:hover {
     @apply text-gray-400;
   }
-  .mokuji li {
+  .main_contents div li {
     @apply my-5 font-bold;
   }
-  .mokuji ul li {
+  .main_contents div ul li {
     @apply ml-6 mt-0 font-normal !important;
   }
-  .mokuji {
-    @apply max-w-md m-auto;
-  }
+
   .main_sns_container ul {
     @apply flex justify-around h-10;
   }
