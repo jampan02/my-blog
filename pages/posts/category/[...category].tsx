@@ -1,21 +1,18 @@
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import { getAllPosts, getPostsByCategory } from "../../lib/api";
-import Layout from "../../components/Layout";
+import { GetStaticPaths } from "next";
+import {
+  CategoryProps,
+  getAllPosts,
+  getPostsByCategory,
+} from "../../../lib/api";
+import Layout from "../../../components/Layout";
 import Link from "next/link";
-import Head from "../../components/head";
+import Head from "../../../components/head";
 
-const Category = ({
-  contents,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Category = ({ contents }: { contents: CategoryProps }) => {
+  console.log("C=", contents);
   return (
     <Layout>
-      <Head
-        title={`${contents.category}に関する投稿一覧`}
-        description={undefined}
-        keyword={undefined}
-        image={undefined}
-        url={undefined}
-      />
+      <Head title={`${contents.category}に関する投稿一覧`} />
       <p className="contents_header">{`${contents.category}に関する投稿一覧`}</p>
       {contents.data.map((content: any) => (
         <Link
@@ -39,8 +36,14 @@ const Category = ({
 };
 export default Category;
 
-export const getStaticProps: GetStaticProps = async ({ params }: any) => {
+export const getStaticProps = async ({
+  params,
+}: {
+  params: { category: string[] };
+}) => {
+  console.log("ppp", params);
   const contents = getPostsByCategory(params.category);
+  console.log("C=", contents);
   return {
     props: {
       contents,
@@ -53,12 +56,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   console.log("posts=", posts);
   //カテゴリー名をgetStaticPropsに渡す
   const paths = posts.map((post) => {
+    post.pop();
     return {
       params: {
-        category: post[0],
+        category: post,
       },
     };
   });
-  console.log("paths=", paths);
+  console.log("paths=", ...paths);
   return { paths: paths, fallback: false };
 };

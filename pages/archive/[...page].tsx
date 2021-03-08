@@ -15,33 +15,32 @@ export default function Archive({
   // パスパラメータから値を取得
   return (
     <Layout>
-      <Head
-        title={`${date[0]}年${date[1]}月の投稿一覧`}
-        description={undefined}
-        keyword={undefined}
-        image={undefined}
-        url={undefined}
-      />
+      <Head title={`${date[0]}年${date[1]}月の投稿一覧`} />
       <p className="contents_header">{`${date[0]}年${date[1]}月の投稿一覧`}</p>
-      {posts.map((post: POSTS) => (
-        <div key={`${post.id}of${post.categoryPath}atResult`}>
-          <Link
-            href="/posts/[category]/[id]"
-            as={`/posts/${post.categoryPath}/${post.id}`}
-          >
-            <a>
-              <div className="contents_container">
-                <img src={post.image} />
-                <div>
-                  <p className="contents_container_title">{post.title}</p>
-                  <p className="contents_container_category">{post.category}</p>
-                  <p className="contents_container_date">{post.date} </p>
+      {posts.map((post: POSTS) => {
+        const path = post.categoryPath.join("/");
+        return (
+          <div key={`${post.id}of${path}atResult`}>
+            <Link
+              href="/posts/[category]/[id]"
+              as={`/posts/${path}/${post.id}`}
+            >
+              <a>
+                <div className="contents_container">
+                  <img src={post.image} />
+                  <div>
+                    <p className="contents_container_title">{post.title}</p>
+                    <p className="contents_container_category">
+                      {post.category}
+                    </p>
+                    <p className="contents_container_date">{post.date} </p>
+                  </div>
                 </div>
-              </div>
-            </a>
-          </Link>
-        </div>
-      ))}
+              </a>
+            </Link>
+          </div>
+        );
+      })}
     </Layout>
   );
 }

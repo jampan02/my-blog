@@ -14,7 +14,10 @@ export const CategoryiesArea = () => {
         <ul>
           {categories.map((category) => (
             <li key={`${category.category}of${category.path}atCategoryiesArea`}>
-              <Link href="/posts/[category]" as={`/posts/${category.path}`}>
+              <Link
+                href="/posts/category/[category]"
+                as={`/posts/category/${category.path}`}
+              >
                 <a>{category.category}</a>
               </Link>
             </li>

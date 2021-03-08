@@ -7,6 +7,7 @@ const DIR = path.join(process.cwd(), "content/posts");
 
 export const getAllPosts = () => {
   const fileNamePath = glob.sync(`${postDirPrefix}/**/*.md`);
+  console.log("filena", fileNamePath);
   const fileName = fileNamePath
     .map((file) => file.split(postDirPrefix).pop())
     .map((slug) => String(slug).replace(/\.md$/, "").split("/"));
@@ -19,30 +20,31 @@ export type DetailContent = {
   keyword: any;
   image: any;
   url: any;
-  category: string;
+  category: string[];
   content: string;
   date: string;
-  categoryPath: string;
+  categoryPath: string[];
   id: string;
 };
 
 export const getPostBySlug = (slugArray: string[]) => {
-  const categoryInEnglish = slugArray[0];
+  //"tex/sdfs"こんなんにする
   const id = slugArray[slugArray.length - 1];
-  const category = getCategory(categoryInEnglish);
   const slugPath = slugArray.join("/");
   const slugFullPath = path.join(DIR, `/${slugPath}.md`);
   console.log("slugFullPath=", slugFullPath);
   const fileContent = fs.readFileSync(slugFullPath, "utf8");
   const { data, content } = matter(fileContent);
   const date = getDate(data["date"]);
-  const categoryPath = categoryInEnglish;
-  console.log("huga=", categoryPath);
   const title = data["title"];
   const description = data["description"];
   const keyword = data["keyword"];
   const image = data["image"];
   const url = data["url"];
+  const categoryPath = slugArray;
+  slugArray.pop();
+  const categoryInEnglish = slugArray.join("/");
+  const category = getCategory(categoryInEnglish);
   const items: DetailContent = {
     title,
     description,
@@ -66,27 +68,42 @@ export type CategoryProps = {
     id: string;
     image: string;
   }[];
-  category: string;
-  categoryPath: string;
+  category: string[];
+  categoryPath: string[];
 };
 
 //カテゴリ内投稿取得関数
-export const getPostsByCategory = (category: string) => {
-  let items: CategoryProps = { data: [], category: "", categoryPath: "" };
+export const getPostsByCategory = (slugs: string[]) => {
+  console.log("slugs=", slugs);
+  let category: string;
+  if (Array.isArray(slugs)) {
+    //配列だったら
+    console.log(slugs.length);
+    category = slugs.join("/");
+  } else {
+    category = slugs;
+  }
+
+  console.log("catego=", category);
+  let items: CategoryProps = { data: [], category: [], categoryPath: [] };
   const categoryPath = path.join(DIR, `/${category}/`);
+  console.log("80path=", categoryPath);
   const allNames = fs.readdirSync(categoryPath);
+  console.log("83name", allNames);
+
+  const results = getMakePath(allNames, category) as string[];
   const realCategory = getCategory(category);
-  for (let i = 0; i < allNames.length; i++) {
-    console.log("fulklpaht=", `${categoryPath}${allNames[i]}`);
+  for (let i = 0; i < results.length; i++) {
+    console.log("fulklpaht=", `${categoryPath}${results[i]}`);
     const fileContent = fs.readFileSync(
-      `${categoryPath}${allNames[i]}`,
+      `${categoryPath}${results[i]}`,
       "utf-8"
     );
     const { data } = matter(fileContent);
     const date = getDate(data["date"]);
     const title = data["title"];
     const image = data["image"];
-    const id = allNames[i].replace(/\.md$/, "");
+    const id = results[i].replace(/\.md$/, "");
     console.log("id=", id);
     items.data.push({
       title,
@@ -96,7 +113,8 @@ export const getPostsByCategory = (category: string) => {
     });
   }
   items.category = realCategory;
-  items.categoryPath = category;
+  //tech/pro >> ["tech","pro"]の形にする
+  items.categoryPath = category.split("/");
   //日付ごとにソート
   items.data.sort(function (a, b) {
     if (a.date > b.date) {
@@ -105,17 +123,17 @@ export const getPostsByCategory = (category: string) => {
       return 1;
     }
   });
-
+  console.log("125", items);
   return items;
 };
 
 export type POSTS = {
   title: string;
   image: string;
-  category: string;
+  category: string[];
   date: string;
   id: string;
-  categoryPath: string;
+  categoryPath: string[];
 };
 //全件取得
 export const getPosts = () => {
@@ -215,17 +233,32 @@ const getDate = (date: Date) => {
 
 //カテゴリー取得
 const getCategory = (english: string) => {
-  let category: string = "";
-  switch (english) {
+  const path = english.split("/");
+  let category: string[] = [];
+  switch (path[0]) {
     case "government":
-      category = "政治";
+      switch (path[1]) {
+        case "":
+          break;
+
+        default:
+          break;
+      }
+      category = ["政治"];
       return category;
 
     case "technology":
-      return (category = "テクノロジー");
+    case "government":
+      switch (path[1]) {
+        case "programming":
+          category = ["テクノロジー", "プログラミング"];
+          return category;
+      }
+      category = ["テクノロジー"];
+      return category;
 
     default:
-      return (category = "");
+      return (category = []);
   }
 };
 
@@ -239,4 +272,50 @@ const getDatePath = (slugArray: string[]) => {
   let year = date.getFullYear();
   let month = (date.getMonth() < 9 ? "0" : "") + (date.getMonth() + 1);
   return [String(year), month as string];
+};
+
+const getMakePath = (items: string[], huga: string) => {
+  //カテゴリ取得
+  const pattern = /\.md$/;
+  let folders: string[] = [];
+  const defaultPaths = items.map((name) => {
+    //フォルダだった場合
+    if (!pattern.test(name)) {
+      folders.push(name);
+      return;
+    } else {
+      return name;
+    }
+  });
+  //二層目
+  const paths = folders.map((name) => {
+    const fullPath = path.join(DIR, `/${huga}/${name}/`);
+    const fileNames = fs.readdirSync(fullPath);
+    return fileNames.map((fileName) => {
+      return `${name}/${fileName}`;
+    });
+  });
+  console.log("292path", paths);
+  let array1d = [];
+  for (let array of paths) {
+    for (let result of array) {
+      array1d.push(result);
+    }
+  }
+  const results = array1d.map((data) => {
+    //フォルダだった場合
+    if (!pattern.test(data)) {
+      folders.push(data);
+      return;
+    }
+    return data;
+  });
+  console.log("res=", results);
+  const hoge = defaultPaths.concat(results as string[]);
+  console.log("hoggg=", hoge);
+  const allPaths = hoge.filter((item) => {
+    return item !== undefined;
+  });
+  return allPaths;
+  //*二層目までしか対応していない
 };

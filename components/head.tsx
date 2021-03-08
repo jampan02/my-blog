@@ -5,23 +5,27 @@
 import Head from "next/head";
 
 interface Props {
-  title: string | undefined;
-  description: string | undefined;
-  keyword: string | undefined;
-  image: string | undefined;
-  url: string | undefined;
+  title?: string;
+  description?: string;
+  keyword?: string;
+  image?: string;
+  url?: string;
 }
 
-export default ({
-  title = "World Hack",
-  description = "英語、筋トレ、IT等幅広いコンテンツを取り扱っております。読めば得すること間違いなしの記事を沢山書いております。よかったら見ていってください。",
-  keyword = "英語　喋る,筋トレ　継続,web,フロントエンドエンジニア　なるには,web系エンジニア　なるには,ライフハック",
-  image = "",
-  url = "",
-}: Props): JSX.Element => {
+export default (props: Props): JSX.Element => {
+  let { title, description, keyword, image, url } = props;
+  if (!title) {
+    title = "World Hack";
+  } else if (!keyword) {
+    keyword =
+      "英語　喋る,筋トレ　継続,web,フロントエンドエンジニア　なるには,web系エンジニア　なるには,ライフハック";
+  } else if (!description) {
+    description =
+      "英語、筋トレ、IT等幅広いコンテンツを取り扱っております。読めば得すること間違いなしの記事を沢山書いております。よかったら見ていってください。";
+  }
   return (
     <Head>
-      <title>{`${title} | World Hack`}</title>
+      <title>{title ? "World Hack" : `${title} | World Hack`}</title>
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta name="keywords" content={keyword} />

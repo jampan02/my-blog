@@ -23,32 +23,29 @@ const Result = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return (
     <Layout>
-      <Head
-        title={`"${s}"を含む投稿一覧`}
-        description={undefined}
-        keyword={undefined}
-        image={undefined}
-        url={undefined}
-      />
+      <Head title={`"${s}"を含む投稿一覧`} />
       <p className="contents_header">{`"${s}"を含む投稿一覧`}</p>
-      {resutls.map((post: POSTS) => (
-        <Link
-          href="/posts/[category]/[id]"
-          as={`/posts/${post.categoryPath}/${post.id}`}
-          key={`${post.id}of${post.categoryPath}atResult`}
-        >
-          <a>
-            <div className="contents_container">
-              <img src={post.image} />
-              <div>
-                <p className="contents_container_title">{post.title}</p>
-                <p className="contents_container_category">{post.category}</p>
-                <p className="contents_container_date">{post.date} </p>
+      {resutls.map((post: POSTS) => {
+        const path = post.categoryPath.join("/");
+        return (
+          <Link
+            href="/posts/[category]/[id]"
+            as={`/posts/${path}/${post.id}`}
+            key={`${post.id}of${path}atResult`}
+          >
+            <a>
+              <div className="contents_container">
+                <img src={post.image} />
+                <div>
+                  <p className="contents_container_title">{post.title}</p>
+                  <p className="contents_container_category">{post.category}</p>
+                  <p className="contents_container_date">{post.date} </p>
+                </div>
               </div>
-            </div>
-          </a>
-        </Link>
-      ))}
+            </a>
+          </Link>
+        );
+      })}
     </Layout>
   );
 };
