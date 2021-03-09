@@ -20,7 +20,7 @@ const HEAD = (props: Props): JSX.Element => {
     description =
       "英語、筋トレ、IT等幅広いコンテンツを取り扱っております。読めば得すること間違いなしの記事を沢山書いております。よかったら見ていってください。";
   }
-  //urlをこねくと
+  //urlをつなげる
   url = `https://unruffled-spence-0404bb.netlify.app/posts/${url}`;
   return (
     <Head>
