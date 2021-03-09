@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getPosts, POSTS } from "../../lib/api";
 import Link from "next/link";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import Head from "../../components/head";
+import HEAD from "../../components/head";
 
 const Result = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [resutls, setResults] = useState<POSTS[]>([]);
@@ -23,7 +23,7 @@ const Result = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return (
     <Layout>
-      <Head title={`"${s}"を含む投稿一覧`} />
+      <HEAD title={`"${s}"を含む投稿一覧`} noIndex={true} isFollow={false} />
       <p className="contents_header">{`"${s}"を含む投稿一覧`}</p>
       {resutls.map((post: POSTS) => {
         const path = post.categoryPath.join("/");

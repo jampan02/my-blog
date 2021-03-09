@@ -6,13 +6,16 @@ import {
 } from "../../../lib/api";
 import Layout from "../../../components/Layout";
 import Link from "next/link";
-import Head from "../../../components/head";
+import HEAD from "../../../components/head";
 
 const Category = ({ contents }: { contents: CategoryProps }) => {
-  console.log("C=", contents);
   return (
     <Layout>
-      <Head title={`${contents.category}に関する投稿一覧`} />
+      <HEAD
+        title={`${contents.category}に関する投稿一覧`}
+        noIndex={true}
+        isFollow={true}
+      />
       <p className="contents_header">{`${contents.category}に関する投稿一覧`}</p>
       {contents.data.map((content: any) => (
         <Link
@@ -41,9 +44,8 @@ export const getStaticProps = async ({
 }: {
   params: { category: string[] };
 }) => {
-  console.log("ppp", params);
   const contents = getPostsByCategory(params.category);
-  console.log("C=", contents);
+
   return {
     props: {
       contents,
@@ -53,7 +55,7 @@ export const getStaticProps = async ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = getAllPosts();
-  console.log("posts=", posts);
+
   //カテゴリー名をgetStaticPropsに渡す
   const paths = posts.map((post) => {
     post.pop();
@@ -63,6 +65,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       },
     };
   });
-  console.log("paths=", ...paths);
+
   return { paths: paths, fallback: false };
 };

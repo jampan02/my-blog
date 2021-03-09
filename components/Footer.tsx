@@ -22,7 +22,7 @@ export const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="">
+              <Link href="/">
                 <a>サイトマップ</a>
               </Link>
             </li>

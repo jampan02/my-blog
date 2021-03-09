@@ -4,7 +4,7 @@ import remark from "remark";
 import html from "remark-html";
 import Layout from "../../components/Layout";
 import Link from "next/link";
-import Head from "../../components/head";
+import HEAD from "../../components/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
@@ -43,10 +43,9 @@ const Post = ({
   post: Posts;
   relatedPosts: RelatedPosts;
 }) => {
-  console.log("hoge=", post);
   return (
     <Layout>
-      <Head
+      <HEAD
         title={post.title}
         description={post.description}
         keyword={post.keyword}
@@ -159,14 +158,7 @@ export const getStaticProps = async ({
   //メイン投稿取得
   const post = getPostBySlug(params.slug);
   const content = await markdownTohtml(post.content);
-  /*console.log("conte=", content);
-  //関連投稿取得
-  console.log("befoSlug=", params.slug);
-  if (params.slug.length >= 2) {
-    params.slug.pop();
-  }
 
-  console.log("aftSlug=", params.slug);*/
   const items = getPostsByCategory(params.slug);
   const slicedItems = items.data.slice(0, 5);
   const relatedPosts = {
@@ -186,7 +178,7 @@ export const getStaticProps = async ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = getAllPosts();
-  console.log("posts=", posts);
+
   const paths = posts.map((post) => {
     return {
       params: {
@@ -194,6 +186,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       },
     };
   });
-  console.log("194paths=", paths);
+
   return { paths: paths, fallback: false };
 };

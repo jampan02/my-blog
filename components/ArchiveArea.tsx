@@ -10,7 +10,6 @@ type Archive = {
 export const ArchiveArea = () => {
   const [archives, setArchves] = useState<Archive[]>([]);
   useEffect(() => {
-    console.log("renderrrr");
     const { items } = getAllDatesByMonth();
     setArchves(items);
   }, []);
@@ -50,7 +49,6 @@ const getAllDatesByMonth = () => {
   const allYears = [...Array(latestDate[0] - oldestDate[0] + 1)].map(
     (_, i) => i + oldestDate[0]
   );
-  console.log(allYears);
   //[01,02,03]みたいな感じの取得
   let allMonths: number[] = [];
   let setDatas: Archive[] = [];
@@ -116,7 +114,6 @@ const getAllDatesByMonth = () => {
               : `${differenceOfYear}/${0}${month}`,
           data: [differenceOfYear, month],
         }));
-        console.log("DAD=", dataByYear);
         return dataByYear;
       }
     );
@@ -129,7 +126,5 @@ const getAllDatesByMonth = () => {
 
     setDatas = [...datasAtFirstYear, ...array1d, ...datasAtThisYear];
   }
-  console.log("setDatas=", setDatas);
-  // const a = [...Array(12 - oldestDate[1])].map((_, i) => i + oldestDate[1]);
   return { items: [...dates, ...setDatas] };
 };

@@ -1,7 +1,7 @@
 import { GetStaticPaths } from "next";
 import Link from "next/link";
 import React from "react";
-import Head from "../../components/head";
+import HEAD from "../../components/head";
 import Layout from "../../components/Layout";
 import { getDatesPath, getPostsByDate, POSTS } from "../../lib/api";
 
@@ -15,7 +15,7 @@ export default function Archive({
   // パスパラメータから値を取得
   return (
     <Layout>
-      <Head title={`${date[0]}年${date[1]}月の投稿一覧`} />
+      <HEAD title={`${date[0]}年${date[1]}月の投稿一覧`} />
       <p className="contents_header">{`${date[0]}年${date[1]}月の投稿一覧`}</p>
       {posts.map((post: POSTS) => {
         const path = post.categoryPath.join("/");
@@ -61,7 +61,7 @@ export const getStaticProps = async ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   let posts = getDatesPath();
-  console.log("posts hufa=", posts);
+
   const paths = posts.map((post) => {
     return {
       params: {
@@ -69,6 +69,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       },
     };
   });
-  console.log("paths=", paths);
+
   return { paths: paths, fallback: false };
 };

@@ -1,10 +1,10 @@
 import Layout from "../components/Layout";
-import Head from "../components/head";
+import HEAD from "../components/head";
 
 export default function Custom404() {
   return (
     <Layout>
-      <Head title="404" />
+      <HEAD title="404" noIndex={true} isFollow={false} />
       <h1>404</h1>
     </Layout>
   );

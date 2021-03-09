@@ -2,7 +2,7 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { getPosts } from "../lib/api";
-import Head from "../components/head";
+import HEAD from "../components/head";
 
 type POSTS = {
   title: string;
@@ -18,11 +18,11 @@ const IndexPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
-      <Head />
+      <HEAD noIndex={true} isFollow={true} />
       <p className="contents_header">最近の投稿</p>
       {posts.map((post: POSTS) => {
         const path = post.categoryPath.join("/");
-        console.log("posss", post);
+
         return (
           <div key={`${post.id}of${path}atHome`}>
             <Link

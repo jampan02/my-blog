@@ -7,7 +7,6 @@ const DIR = path.join(process.cwd(), "content/posts");
 
 export const getAllPosts = () => {
   const fileNamePath = glob.sync(`${postDirPrefix}/**/*.md`);
-  console.log("filena", fileNamePath);
   const fileName = fileNamePath
     .map((file) => file.split(postDirPrefix).pop())
     .map((slug) => String(slug).replace(/\.md$/, "").split("/"));
@@ -32,7 +31,6 @@ export const getPostBySlug = (slugArray: string[]) => {
   const id = slugArray[slugArray.length - 1];
   const slugPath = slugArray.join("/");
   const slugFullPath = path.join(DIR, `/${slugPath}.md`);
-  console.log("slugFullPath=", slugFullPath);
   const fileContent = fs.readFileSync(slugFullPath, "utf8");
   const { data, content } = matter(fileContent);
   const date = getDate(data["date"]);
@@ -74,27 +72,23 @@ export type CategoryProps = {
 
 //カテゴリ内投稿取得関数
 export const getPostsByCategory = (slugs: string[]) => {
-  console.log("slugs=", slugs);
   let category: string;
   if (Array.isArray(slugs)) {
     //配列だったら
-    console.log(slugs.length);
+
     category = slugs.join("/");
   } else {
     category = slugs;
   }
 
-  console.log("catego=", category);
   let items: CategoryProps = { data: [], category: [], categoryPath: [] };
   const categoryPath = path.join(DIR, `/${category}/`);
-  console.log("80path=", categoryPath);
+
   const allNames = fs.readdirSync(categoryPath);
-  console.log("83name", allNames);
 
   const results = getMakePath(allNames, category) as string[];
   const realCategory = getCategory(category);
   for (let i = 0; i < results.length; i++) {
-    console.log("fulklpaht=", `${categoryPath}${results[i]}`);
     const fileContent = fs.readFileSync(
       `${categoryPath}${results[i]}`,
       "utf-8"
@@ -104,7 +98,7 @@ export const getPostsByCategory = (slugs: string[]) => {
     const title = data["title"];
     const image = data["image"];
     const id = results[i].replace(/\.md$/, "");
-    console.log("id=", id);
+
     items.data.push({
       title,
       image,
@@ -123,7 +117,7 @@ export const getPostsByCategory = (slugs: string[]) => {
       return 1;
     }
   });
-  console.log("125", items);
+
   return items;
 };
 
@@ -268,7 +262,7 @@ const getDatePath = (slugArray: string[]) => {
   const fileContent = fs.readFileSync(slugFullPath, "utf8");
   const { data } = matter(fileContent);
   const date = data["date"];
-  console.log("date=", date);
+
   let year = date.getFullYear();
   let month = (date.getMonth() < 9 ? "0" : "") + (date.getMonth() + 1);
   return [String(year), month as string];
@@ -295,7 +289,7 @@ const getMakePath = (items: string[], huga: string) => {
       return `${name}/${fileName}`;
     });
   });
-  console.log("292path", paths);
+
   let array1d = [];
   for (let array of paths) {
     for (let result of array) {
@@ -310,9 +304,9 @@ const getMakePath = (items: string[], huga: string) => {
     }
     return data;
   });
-  console.log("res=", results);
+
   const hoge = defaultPaths.concat(results as string[]);
-  console.log("hoggg=", hoge);
+
   const allPaths = hoge.filter((item) => {
     return item !== undefined;
   });
