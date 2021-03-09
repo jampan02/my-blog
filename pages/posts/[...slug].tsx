@@ -106,7 +106,7 @@ const Post = ({
           <img
             className="my-10"
             src={post.image}
-            alt={post.title || "WEB系エンジニアになりたい"}
+            alt={post.title || "Fronted Code"}
           />
           <div
             className="main_contents"

@@ -16,24 +16,15 @@ interface Props {
 
 const HEAD = (props: Props): JSX.Element => {
   let { title, description, keyword, image, url, isFollow, noIndex } = props;
-  if (!keyword) {
-    keyword =
-      "英語　喋る,筋トレ　継続,web,フロントエンドエンジニア　なるには,web系エンジニア　なるには,ライフハック";
-  } else if (!description) {
+  if (!description) {
     description =
       "英語、筋トレ、IT等幅広いコンテンツを取り扱っております。読めば得すること間違いなしの記事を沢山書いております。よかったら見ていってください。";
-  } else if (!url) {
-    url = "ゆーあるえる";
   }
   //urlをこねくと
-  url=`https://unruffled-spence-0404bb.netlify.app/posts/${url}`
+  url = `https://unruffled-spence-0404bb.netlify.app/posts/${url}`;
   return (
     <Head>
-      <title>
-        {title
-          ? `${title} | Web系エンジニアになりたい`
-          : "Web系エンジニアになりたい"}
-      </title>
+      <title>{title ? `${title} | Fronted Code` : "Fronted Code"}</title>
       {/*固定設定 */}
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
