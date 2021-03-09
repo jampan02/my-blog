@@ -71,7 +71,12 @@
   .main_contents div ul li {
     @apply ml-6 mt-0 font-normal !important;
   }
-
+  .main_contents pre {
+    @apply bg-gray-500 py-4;
+  }
+  .main_contents code {
+    @apply text-white ml-4;
+  }
   .main_sns_container ul {
     @apply flex justify-around h-10;
   }

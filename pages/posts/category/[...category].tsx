@@ -9,6 +9,7 @@ import Link from "next/link";
 import HEAD from "../../../components/head";
 
 const Category = ({ contents }: { contents: CategoryProps }) => {
+  const path = contents.categoryPath.join("/");
   return (
     <Layout>
       <HEAD
@@ -20,8 +21,8 @@ const Category = ({ contents }: { contents: CategoryProps }) => {
       {contents.data.map((content: any) => (
         <Link
           href="/posts/[category]/[id]"
-          as={`/posts/${contents.categoryPath}/${content.id}`}
-          key={`${contents.categoryPath}/${content.id}`}
+          as={`/posts/${path}/${content.id}`}
+          key={`${path}/${content.id}atCategory`}
         >
           <a>
             <div className="contents_container">
@@ -45,7 +46,7 @@ export const getStaticProps = async ({
   params: { category: string[] };
 }) => {
   const contents = getPostsByCategory(params.category);
-
+  console.log("contents=", contents);
   return {
     props: {
       contents,
@@ -55,7 +56,7 @@ export const getStaticProps = async ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = getAllPosts();
-
+  console.log(posts);
   //カテゴリー名をgetStaticPropsに渡す
   const paths = posts.map((post) => {
     post.pop();

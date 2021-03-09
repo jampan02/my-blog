@@ -1,8 +1,26 @@
 import Link from "next/link";
 
 const categories = [
-  { category: "政治", path: "government" },
-  { category: "テクノロジー", path: "technology" },
+  {
+    name: "フロントエンド",
+    path: "frontend",
+    children: [
+      {
+        name: "React",
+        path: "react",
+      },
+    ],
+  },
+  {
+    name: "バックエンド",
+    path: "backend",
+    children: [
+      {
+        name: "Firebase",
+        path: "firebase",
+      },
+    ],
+  },
 ];
 
 export const CategoryiesArea = () => {
@@ -12,14 +30,31 @@ export const CategoryiesArea = () => {
 
       <nav className="link_nav">
         <ul>
-          {categories.map((category) => (
-            <li key={`${category.category}of${category.path}atCategoryiesArea`}>
+          {categories.map((item) => (
+            <li
+              className="font-bold text-lg"
+              key={`${item.name}of${item.path}atCategoryiesArea`}
+            >
               <Link
                 href="/posts/category/[category]"
-                as={`/posts/category/${category.path}`}
+                as={`/posts/category/${item.path}`}
               >
-                <a>{category.category}</a>
+                <a>{item.name}</a>
               </Link>
+              <ul className="ml-4 text-base font-normal">
+                {item.children.map((childItem) => (
+                  <li
+                    key={`${childItem.name}of${childItem.path}atCategoryiesArea`}
+                  >
+                    <Link
+                      href="/posts/category/[parentCategory]/[path]"
+                      as={`/posts/category/${item.path}/${childItem.path}`}
+                    >
+                      <a>{childItem.name}</a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>

@@ -230,25 +230,21 @@ const getCategory = (english: string) => {
   const path = english.split("/");
   let category: string[] = [];
   switch (path[0]) {
-    case "government":
+    case "backend":
       switch (path[1]) {
-        case "":
-          break;
-
-        default:
-          break;
-      }
-      category = ["政治"];
-      return category;
-
-    case "technology":
-    case "government":
-      switch (path[1]) {
-        case "programming":
-          category = ["テクノロジー", "プログラミング"];
+        case "firebase":
+          category = ["バックエンド", "Firebase"];
           return category;
       }
-      category = ["テクノロジー"];
+      category = ["バックエンド"];
+      return category;
+    case "frontend":
+      switch (path[1]) {
+        case "react":
+          category = ["フロントエンド", "React"];
+          return category;
+      }
+      category = ["フロントエンド"];
       return category;
 
     default:
