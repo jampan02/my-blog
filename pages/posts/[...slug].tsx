@@ -103,7 +103,11 @@ const Post = ({
           <span className="py-2 px-3 rounded-lg bg-blue-400 mt-8 text-gray-700">
             {post.category}
           </span>
-          <img className="my-10" src={post.image} alt={post.title} />
+          <img
+            className="my-10"
+            src={post.image}
+            alt={post.title || "WEB系エンジニアになりたい"}
+          />
           <div
             className="main_contents"
             dangerouslySetInnerHTML={{ __html: post.content }}

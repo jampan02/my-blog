@@ -12,7 +12,7 @@ const Layout: React.FC<Props> = ({ children }) => (
   <div>
     <header className="bg-blue-200 mb-20 py-10">
       <div className="flex justify-center items-center">
-        <img className="h-8 w-8" src="/images/earth.png" />
+        <img className="h-8 w-8" src="/images/earth.png" alt="earth" />
         <span className="text-4xl ml-2 font-bold text-center mb-2 text-gray-700">
           Web系エンジニアになりたい
         </span>
