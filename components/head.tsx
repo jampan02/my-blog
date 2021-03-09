@@ -25,9 +25,15 @@ const HEAD = (props: Props): JSX.Element => {
   } else if (!url) {
     url = "ゆーあるえる";
   }
+  //urlをこねくと
+  url=`https://unruffled-spence-0404bb.netlify.app/posts/${url}`
   return (
     <Head>
-      <title>{title ? `${title} | World Hack` : "World Hack"}</title>
+      <title>
+        {title
+          ? `${title} | Web系エンジニアになりたい`
+          : "Web系エンジニアになりたい"}
+      </title>
       {/*固定設定 */}
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -47,6 +53,7 @@ const HEAD = (props: Props): JSX.Element => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta name="keywords" content={keyword} />
+      <meta name="description" content={description} />
       <meta property="og:type" content="blog" />
       <meta property="og:url" content={url} />
       <meta property="og:image" content={image} />

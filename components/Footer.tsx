@@ -6,7 +6,9 @@ export const Footer = () => {
   return (
     <>
       <div className="">
-        <p className="font-bold text-4xl text-gray-300">World Hack</p>
+        <p className="font-bold text-4xl text-gray-300">
+          Web系エンジニアになりたい
+        </p>
       </div>
       <div className="">
         <nav className="mb-4">
