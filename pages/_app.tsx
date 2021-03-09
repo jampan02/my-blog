@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { createContext } from "react";
 import Router from "next/router";
 import "../styles/globals.css";
