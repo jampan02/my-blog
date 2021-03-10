@@ -114,7 +114,7 @@
     @apply text-2xl font-bold mb-4;
   }
   .contents_container {
-    @apply flex min-h-28 mb-8 bg-gray-100 rounded-lg;
+    @apply flex h-28 mb-8 bg-gray-100 rounded-lg md:h-36;
   }
   .contents_container:hover {
     @apply opacity-50;
