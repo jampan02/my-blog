@@ -19,5 +19,5 @@
     "target": "esnext"
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "lib/gtag.js"]
+  "include": ["**/*.ts", "**/*.tsx", "lib/gtag.js", "postexport.js"]
 }
