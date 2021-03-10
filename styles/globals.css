@@ -35,7 +35,7 @@
     @apply text-xl bg-gray-200 py-1 px-3 mb-2 font-bold text-gray-700 inline-block;
   }
   .main_contents_container {
-    @apply bg-white p-10 mb-20 rounded;
+    @apply bg-white p-10 mb-20 rounded lg:p-4;
   }
   .main_contents ol li {
     @apply list-decimal;
@@ -114,19 +114,19 @@
     @apply text-2xl font-bold mb-4;
   }
   .contents_container {
-    @apply flex h-28 mb-8 bg-gray-100 rounded-lg;
+    @apply flex min-h-28 mb-8 bg-gray-100 rounded-lg;
   }
   .contents_container:hover {
     @apply opacity-50;
   }
   .contents_container img {
-    @apply h-full w-28 rounded-l-lg object-cover;
+    @apply w-28 rounded-l-lg object-cover;
   }
   .contents_container div {
     @apply p-5 bg-white w-full rounded-r-lg relative;
   }
   .contents_container_title {
-    @apply text-xl font-bold text-gray-800;
+    @apply text-xl font-bold text-gray-800 mb-4;
   }
   .contents_container_category {
     @apply top-1 absolute text-gray-500 text-sm;
