@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from "next";
-import { getPosts } from "../lib/api";
+import { getAllPosts, getPostBySlug } from "../lib/api";
 
 export const getServerSideProps = async ({
   res,
@@ -22,15 +22,18 @@ export default Page;
 const generateSitemapXml = async (): Promise<string> => {
   let xml = `<?xml version="1.0" encoding="UTF-8"?>`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
-  const appHost = "https://frontedcode.com/";
   // ここでurlを足していく
-  const posts = await getPosts();
+  const appHost = "https://frontedcode.com/";
+  const list = await getAllPosts();
+  const posts = list.map((path) => {
+    return getPostBySlug(path);
+  });
   posts.forEach((post) => {
+    const postDate = post.date.replace(/\//g, "-");
     const postPath = post.categoryPath.join("/");
-    const postDate = post.date.replace("/", "-");
     xml += `
       <url>
-        <loc>${appHost}${postPath}</loc>
+        <loc>${appHost}${postPath}/${post.id}</loc>
         <lastmod>${postDate}</lastmod>
         <changefreq>weekly</changefreq>
       </url>
