@@ -4,13 +4,13 @@ import { getPosts } from "../lib/api";
 export const getServerSideProps = async ({
   res,
 }: GetServerSidePropsContext) => {
-  // この中でサイトマップのコードを生成して返す
-  const xml = await generateSitemapXml();
+  const xml = await generateSitemapXml(); // xmlコードを生成する処理（後で書く）
 
   res.statusCode = 200;
-  res.setHeader("Cache-Control", "s-maxage=86400,stale-white-revalibate"); // 24時間のキャッシュ
-  res.setHeader("Control-Type", "text/xml");
+  res.setHeader("Cache-Control", "s-maxage=86400, stale-while-revalidate"); // 24時間のキャッシュ
+  res.setHeader("Content-Type", "text/xml");
   res.end(xml);
+
   return {
     props: {},
   };
