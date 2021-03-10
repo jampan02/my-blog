@@ -35,7 +35,7 @@
     @apply text-xl bg-gray-200 py-1 px-3 mb-2 font-bold text-gray-700 inline-block;
   }
   .main_contents_container {
-    @apply bg-white p-10 mb-20 rounded lg:p-4;
+    @apply bg-white  mb-20 rounded xl:p-10 lg:p-4;
   }
   .main_contents ol li {
     @apply list-decimal;
@@ -114,7 +114,7 @@
     @apply text-2xl font-bold mb-4;
   }
   .contents_container {
-    @apply flex h-28 mb-8 bg-gray-100 rounded-lg md:h-36;
+    @apply flex  mb-8 bg-gray-100 rounded-lg xl:h-28 md:h-36;
   }
   .contents_container:hover {
     @apply opacity-50;

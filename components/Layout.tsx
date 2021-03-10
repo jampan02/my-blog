@@ -43,7 +43,7 @@ const Layout: React.FC<Props> = ({ children }) => (
     {/*メインコンテンツとサイドバー */}
     <div className="flex justify-center flex-wrap items-start mx-2">
       <main className="max-w-4xl">{children}</main>
-      <aside className="bg-gray-100 p-5 ml-10 rounded lg:hidden">
+      <aside className="bg-gray-100 p-5 ml-10 rounded xl:block lg:hidden">
         <SideBar />
       </aside>
     </div>
