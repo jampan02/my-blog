@@ -18,7 +18,7 @@ const IndexPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
-      <HEAD noIndex={true} isFollow={true} />
+      <HEAD />
       <p className="contents_header">最近の投稿</p>
       {posts.map((post: POSTS) => {
         const path = post.categoryPath.join("/");
