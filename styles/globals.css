@@ -75,7 +75,7 @@
     @apply bg-gray-500 py-4 overflow-auto;
   }
   .main_contents code {
-    @apply text-white ml-4;
+    @apply text-white pl-4 overflow-visible;
   }
   .main_sns_container ul {
     @apply flex justify-around h-10;
