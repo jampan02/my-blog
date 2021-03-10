@@ -153,4 +153,7 @@
   .footer_nav a:hover {
     @apply text-gray-100 !important;
   }
+  .menu_container {
+    @apply block absolute h-8 w-8 right-4 top-4 xl:hidden;
+  }
 }

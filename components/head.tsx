@@ -18,7 +18,7 @@ const HEAD = (props: Props): JSX.Element => {
   let { title, description, keyword, image, url, isFollow, noIndex } = props;
   if (!description) {
     description =
-      "英語、筋トレ、IT等幅広いコンテンツを取り扱っております。読めば得すること間違いなしの記事を沢山書いております。よかったら見ていってください。";
+      "web関連の技術ブログです。フロントエンド中心で、バックエンドちょいちょいのフロントエンドエンジニアになりたい方向けのブログです。Javascript、React、Firebase等を取り扱っております。";
   }
   //urlをつなげる
   url = `https://frontedcode.com/posts/${url}`;

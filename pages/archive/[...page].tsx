@@ -31,7 +31,7 @@ export default function Archive({
                   <div>
                     <p className="contents_container_title">{post.title}</p>
                     <p className="contents_container_category">
-                      {post.category}
+                      {post.category[post.category.length - 1]}
                     </p>
                     <p className="contents_container_date">{post.date} </p>
                   </div>
