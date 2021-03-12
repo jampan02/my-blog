@@ -36,7 +36,7 @@ const categoryies = [
 const Sitemap = ({ posts }: { posts: POSTS[] }) => {
   return (
     <Layout>
-      <HEAD />
+      <HEAD title="サイトマップ" />
       <ul>
         {categoryies.map((category) => (
           <li key={`${category.top.name}atSiteMap`} className="mb-20">
