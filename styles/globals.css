@@ -156,4 +156,10 @@
   .menu_container {
     @apply block absolute h-8 w-8 right-4 top-4 xl:hidden;
   }
+  .sitemap_title {
+    @apply text-blue-400;
+  }
+  .sitemap_title:hover {
+    @apply border-blue-400 border-b;
+  }
 }

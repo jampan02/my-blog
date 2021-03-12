@@ -37,7 +37,7 @@ const Layout: React.FC<Props> = ({ children }) => {
               </Link>
             </li>
             <li>
-              <Link href="/">
+              <Link href="/sitemap">
                 <a>サイトマップ</a>
               </Link>
             </li>
