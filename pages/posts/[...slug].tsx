@@ -101,7 +101,7 @@ const Post = ({
           </nav>
           <p className="mb-4 text-gray-500">{post.date}</p>
           <span className="py-2 px-3 rounded-lg bg-blue-400 mt-8 text-gray-700">
-            {post.category}
+            {post.category[post.category.length - 1]}
           </span>
           <img
             className="my-10"
