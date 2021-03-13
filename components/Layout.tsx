@@ -57,7 +57,7 @@ const Layout: React.FC<Props> = ({ children }) => {
             <SideBar />
           </div>
         )}
-        <main className="max-w-4xl">{children}</main>
+        <main className="max-w-4xl px-1">{children}</main>
         <aside className="bg-gray-100 p-5 ml-10 rounded hidden xl:block">
           <SideBar />
         </aside>
