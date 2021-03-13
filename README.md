@@ -8,6 +8,7 @@ SSGのブログ
 - レスポンシブ対応
 - SSG
 ## 使用した技術
+- HTML & CSS
 - Typescript
 - React (Next.js)
 - Tailwind
