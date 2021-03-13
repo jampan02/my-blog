@@ -10,7 +10,8 @@ SSGのブログ
 ## 使用した技術
 - HTML & CSS
 - Typescript
-- React (Next.js)
+- React
+    - Next.js
 - Tailwind
 ## その他
 Netlifyでデプロイしました
