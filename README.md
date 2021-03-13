@@ -12,3 +12,5 @@ SSGのブログ
 - Typescript
 - React (Next.js)
 - Tailwind
+## その他
+Netlifyでデプロイしました
