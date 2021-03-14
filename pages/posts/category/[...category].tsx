@@ -12,8 +12,14 @@ const Category = ({ contents }: { contents: CategoryProps }) => {
   const path = contents.categoryPath.join("/");
   return (
     <Layout>
-      <HEAD title={`${contents.category}に関する投稿一覧`} />
-      <p className="contents_header">{`${contents.category}に関する投稿一覧`}</p>
+      <HEAD
+        title={`${
+          contents.category[contents.category.length - 1]
+        }に関する投稿一覧`}
+      />
+      <p className="contents_header">{`${
+        contents.category[contents.category.length - 1]
+      }に関する投稿一覧`}</p>
       {contents.data.map((content: any) => (
         <Link
           href="/posts/[category]/[id]"

@@ -16,6 +16,14 @@ const categoryies = [
           name: "React",
           path: "react",
         },
+        {
+          name: "HTML",
+          path: "html",
+        },
+        {
+          name: "CSS",
+          path: "css",
+        },
       ],
     },
   },
@@ -44,10 +52,6 @@ const Sitemap = ({ posts }: { posts: POSTS[] }) => {
               {category.top.name}
             </p>
             <ul className="ml-12 relative">
-              <span className="absolute h-6 w-6 -left-8 -top-3">
-                <FontAwesomeIcon icon={faAngleRight} />
-              </span>
-
               {posts.map((post) => {
                 const path = post.categoryPath.join("/");
                 if (category.top.path === post.categoryPath[0]) {

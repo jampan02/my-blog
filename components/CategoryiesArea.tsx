@@ -9,6 +9,14 @@ const categories = [
         name: "React",
         path: "react",
       },
+      {
+        name: "HTML",
+        path: "html",
+      },
+      {
+        name: "CSS",
+        path: "css",
+      },
     ],
   },
   {
