@@ -18,13 +18,11 @@ export const SearchArea = () => {
     <div className="sidebar_container">
       <p className="sidebar_title">ブログ内の記事を検索する</p>
       <input
-        data-testId="search-box"
         type="text"
         placeholder="サイト内検索"
         onChange={(e) => setValue(e.target.value)}
       />
       <button
-        data-testId="result-submit"
         onClick={() => {
           onPushResult();
         }}

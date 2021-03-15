@@ -47,8 +47,8 @@ const Sitemap = ({ posts }: { posts: POSTS[] }) => {
       <HEAD title="サイトマップ" />
       <ul>
         {categoryies.map((category) => (
-          <li key={`${category.top.name}atSiteMap`} className="mb-20">
-            <p className="text-3xl font-bold mb-4 py-4 bg-gray-300 pl-4">
+          <li key={`${category.top.name}atSiteMap`} className="mb-28">
+            <p className="text-3xl font-bold mb-8 py-4 bg-gray-300 pl-4">
               {category.top.name}
             </p>
             <ul className="ml-12 relative">
@@ -72,12 +72,12 @@ const Sitemap = ({ posts }: { posts: POSTS[] }) => {
                 return null;
               })}
               {category.top.child.map((childCategory) => (
-                <li key={`${childCategory.name}atSiteMap`}>
+                <li className="mb-4" key={`${childCategory.name}atSiteMap`}>
                   <p className="font-medium text-2xl border-b-4 border-gray-600 text-gray-800">
                     {childCategory.name}
                   </p>
                   <ul className="ml-12 relative">
-                    <span className="absolute h-3 w-3 -left-4">
+                    <span className="absolute h-3 w-3 -left-6">
                       <FontAwesomeIcon icon={faAngleRight} />
                     </span>
                     {posts.map((post) => {
