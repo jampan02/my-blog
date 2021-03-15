@@ -19,7 +19,7 @@ const IndexPage = ({
   return (
     <Layout>
       <HEAD />
-      <p className="contents_header">最近の投稿</p>
+      <p className="contents_header">最近の投稿一覧</p>
       {posts.map((post: POSTS) => {
         const path = post.categoryPath.join("/");
 
