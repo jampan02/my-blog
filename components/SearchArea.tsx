@@ -1,14 +1,15 @@
 import { useState } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const SearchArea = () => {
+  const router = useRouter();
   const [value, setValue] = useState<string>("");
   const onPushResult = () => {
     if (value === "") {
       return;
     }
-    Router.push({
+    router.push({
       pathname: "/posts/result/",
       query: { s: value },
     });
@@ -17,11 +18,13 @@ export const SearchArea = () => {
     <div className="sidebar_container">
       <p className="sidebar_title">ブログ内の記事を検索する</p>
       <input
+        data-testId="search-box"
         type="text"
         placeholder="サイト内検索"
         onChange={(e) => setValue(e.target.value)}
       />
       <button
+        data-testId="result-submit"
         onClick={() => {
           onPushResult();
         }}

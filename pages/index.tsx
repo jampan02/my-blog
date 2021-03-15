@@ -29,7 +29,7 @@ const IndexPage = ({
               href="/posts/[category]/[id]"
               as={`/posts/${path}/${post.id}`}
             >
-              <a>
+              <a data-testId={post.title}>
                 <div className="contents_container">
                   <img src={post.image} />
                   <div>
