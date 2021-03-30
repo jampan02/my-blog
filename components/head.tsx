@@ -19,7 +19,7 @@ const HEAD = (props: Props): JSX.Element => {
   if (!description) {
     description =
       "web関連の技術ブログです。フロントエンド中心で、バックエンドちょいちょいのフロントエンドエンジニアになりたい方向けのブログです。Javascript、React、Firebase等を取り扱っております。";
-  } else if (!image) {
+  } else if (image === "") {
     image = "/images/posts/ogp/default.jpg";
   }
   //urlをつなげる
