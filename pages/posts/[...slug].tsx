@@ -105,7 +105,7 @@ const Post = ({
           </span>
           <img
             className="my-10"
-            src={post.image}
+            src={post.image || "/images/posts/ogp/default.jpg"}
             alt={post.title || "Fronted Code"}
           />
           <div
