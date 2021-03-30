@@ -49,7 +49,7 @@ const Post = ({
         title={post.title}
         description={post.description}
         keyword={post.keyword}
-        image={post.image}
+        image={post.image || "/images/posts/ogp/default.jpg"}
         url={post.url}
       />
       {post.content && (

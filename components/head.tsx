@@ -50,10 +50,7 @@ const HEAD = (props: Props): JSX.Element => {
       <meta name="description" content={description} />
       <meta property="og:type" content="blog" />
       <meta property="og:url" content={url} />
-      <meta
-        property="og:image"
-        content={image || "/images/posts/ogp/default.jpg"}
-      />
+      <meta property="og:image" content={image} />
       <meta property="og:site_name" content={title} />
       <meta property="og:locale" content="ja_JP" />
       <meta name="twitter:card" content="summary" />
