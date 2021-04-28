@@ -27,6 +27,10 @@ const categories = [
         name: "Firebase",
         path: "firebase",
       },
+      {
+        name: "Laravel",
+        path: "laravel",
+      },
     ],
   },
 ];
