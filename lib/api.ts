@@ -235,6 +235,9 @@ const getCategory = (english: string) => {
         case "firebase":
           category = ["バックエンド", "Firebase"];
           return category;
+        case "laravel":
+          category = ["バックエンド", "Laravel"];
+          return category;
       }
       category = ["バックエンド"];
       return category;
