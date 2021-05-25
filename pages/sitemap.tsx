@@ -36,6 +36,22 @@ const categoryies = [
           name: "Firebase",
           path: "firebase",
         },
+		{
+			name:"Laravel",
+			path:"laravel"
+		}
+      ],
+    },
+  },
+  {
+    top: {
+      name: "インフラ",
+      path: "infrastructure",
+      child: [
+        {
+          name: "Docker",
+          path: "docker",
+        },
       ],
     },
   },
