@@ -128,6 +128,7 @@ const Post = ({
         <p className="contents_header">{`${post.category}に関する投稿`}</p>
         {relatedPosts.data.map((post) => (
           <Link
+            className="container_container"
             href="/posts/[category]/[id]"
             as={`/posts/${relatedPosts.categoryPath}/${post.id}/`}
             key={`${post.id}of${post.title}atRelatedPosts`}

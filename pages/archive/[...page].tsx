@@ -20,7 +20,10 @@ export default function Archive({
       {posts.map((post: POSTS) => {
         const path = post.categoryPath.join("/");
         return (
-          <div key={`${post.id}of${path}atResult`}>
+          <div
+            key={`${post.id}of${path}atResult`}
+            className="container_container"
+          >
             <Link
               href="/posts/[category]/[id]"
               as={`/posts/${path}/${post.id}`}

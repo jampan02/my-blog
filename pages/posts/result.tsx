@@ -29,6 +29,7 @@ const Result = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
         const path = post.categoryPath.join("/");
         return (
           <Link
+            className="container_container"
             href="/posts/[category]/[id]"
             as={`/posts/${path}/${post.id}`}
             key={`${post.id}of${path}atResult`}
