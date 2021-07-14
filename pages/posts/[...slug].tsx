@@ -126,23 +126,26 @@ const Post = ({
       {/*同じカテゴリの投稿一覧 */}
       <div className="max-w-2xl m-auto">
         <p className="contents_header">{`${post.category}に関する投稿`}</p>
-        {relatedPosts.data.map((post) => (
-          <Link
-            href="/posts/[category]/[id]"
-            as={`/posts/${relatedPosts.categoryPath}/${post.id}/`}
-            key={`${post.id}of${post.title}atRelatedPosts`}
-          >
-            <a>
-              <div className="contents_container">
-                <img src={post.image || "/images/posts/ogp/default.jpg"} />
-                <div>
-                  <p className="contents_container_title">{post.title}</p>
-                  <p className="contents_container_date">{post.date} </p>
-                </div>
-              </div>
-            </a>
-          </Link>
-        ))}
+			  {relatedPosts.data.map((post) => {
+				  const path = relatedPosts.categoryPath.join("/");
+				  return (
+					  <Link
+						  href="/posts/[category]/[id]"
+						  as={`/posts/${path}/${post.id}/`}
+						  key={`${post.id}of${post.title}atRelatedPosts`}
+					  >
+						  <a>
+							  <div className="contents_container">
+								  <img src={post.image || "/images/posts/ogp/default.jpg"} />
+								  <div>
+									  <p className="contents_container_title">{post.title}</p>
+									  <p className="contents_container_date">{post.date} </p>
+								  </div>
+							  </div>
+						  </a>
+					  </Link>
+				  )
+			  })}
       </div>
     </Layout>
   );
