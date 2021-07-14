@@ -129,7 +129,7 @@
     @apply text-2xl font-bold mb-4;
   }
   .contents_container {
-    @apply flex  mb-8 bg-gray-100 rounded-lg h-32 xl:h-28;
+    @apply flex  mb-8 bg-gray-100 rounded-lg min-h-32 xl:h-28;
   }
   .contents_container:hover {
     @apply opacity-50;

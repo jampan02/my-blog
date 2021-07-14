@@ -40,6 +40,7 @@ const HEAD = (props: Props): JSX.Element => {
       <link rel="icon" type="image/x-icon" href="/favicon.ico"></link>
       <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" href="/apple-touch-icon-precomposed" />
+      <meta property="og:site_name" content="FrontedCode" />
       {/*ここまで* */}
       {/*こっからmetaタグ */}
       {noIndex &&
@@ -55,7 +56,7 @@ const HEAD = (props: Props): JSX.Element => {
       <meta property="og:type" content="blog" />
       <meta property="og:url" content={url} />
       <meta property="og:image" content={image} />
-      <meta property="og:site_name" content={title} />
+
       <meta property="og:locale" content="ja_JP" />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content="@tcr_jp" />
