@@ -22,9 +22,7 @@ const Category = ({ contents }: { contents: CategoryProps }) => {
       }に関する投稿一覧`}</p>
       {contents.data.map((content: any) => (
         <Link
-          href={`/posts/[category]/${
-            contents.categoryPath.length >= 2 && "[miniCategory]/"
-          }[id]`}
+          href={`/posts/[category]/${"[miniCategory]/"}[id]`}
           as={`/posts/${path}/${content.id}`}
           key={`${path}/${content.id}atCategory`}
         >
