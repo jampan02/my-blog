@@ -128,8 +128,7 @@
   .contents_header {
     @apply text-2xl font-bold mb-4;
   }
-  .container_container {
-  }
+
   .contents_container {
     @apply flex  mb-8 bg-gray-100 rounded-lg h-32 min-h-full xl:h-28;
   }
