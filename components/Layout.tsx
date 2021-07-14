@@ -31,6 +31,7 @@ const Layout: React.FC<Props> = ({ children }) => {
                 <a>トップ</a>
               </Link>
             </li>
+
             <li>
               <Link href="/profile">
                 <a>プロフィール</a>

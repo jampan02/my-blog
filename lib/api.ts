@@ -155,7 +155,7 @@ export const getPosts = () => {
       return 1;
     }
   });
-
+  console.log(items);
   return items;
 };
 
@@ -255,14 +255,14 @@ const getCategory = (english: string) => {
       }
       category = ["フロントエンド"];
       return category;
-	case "infrastructure":
-		switch(path[1]){
-			case "docker":
-				category = ["インフラ", "Docker"];
-				return category;
-		}
-		category = ["インフラ"];
-		return category;
+    case "infrastructure":
+      switch (path[1]) {
+        case "docker":
+          category = ["インフラ", "Docker"];
+          return category;
+      }
+      category = ["インフラ"];
+      return category;
     default:
       return (category = []);
   }

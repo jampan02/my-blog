@@ -26,7 +26,9 @@ const IndexPage = ({
         return (
           <div key={`${post.id}of${path}atHome`}>
             <Link
-              href="/posts/[category]/[id]"
+              href={`/posts/[category]${
+                post.categoryPath.length >= 2 && "/[miniCategory]"
+              }/[id]`}
               as={`/posts/${path}/${post.id}`}
             >
               <a data-testId={post.title}>

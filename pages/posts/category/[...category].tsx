@@ -9,7 +9,8 @@ import Link from "next/link";
 import HEAD from "../../../components/head";
 
 const Category = ({ contents }: { contents: CategoryProps }) => {
-  const path = contents.categoryPath.join("/");
+  let path = contents.categoryPath.join("/");
+
   return (
     <Layout>
       <HEAD
@@ -22,9 +23,7 @@ const Category = ({ contents }: { contents: CategoryProps }) => {
       }に関する投稿一覧`}</p>
       {contents.data.map((content: any) => (
         <Link
-          href={`/posts/[category]/${
-            contents.categoryPath.length >= 2 && "[miniCategory]/"
-          }[id]`}
+          href="/posts/[category]/[miniCatebory]/[id]"
           as={`/posts/${path}/${content.id}`}
           key={`${path}/${content.id}atCategory`}
         >
@@ -49,6 +48,7 @@ export const getStaticProps = async ({
 }: {
   params: { category: string[] };
 }) => {
+  console.log(params);
   const contents = getPostsByCategory(params.category);
   console.log("contents=", contents);
   return {
