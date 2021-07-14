@@ -1,16 +1,15 @@
-# アプリの説明
+# FrontedCode
 
-## 概略
-
-SSG のブログ
+SSG ブログサイトです。
+主に、独学で学んだ技術、エラーの解決策等を発信しております。
+[![トップページ](images/top.png)](https://frontedcode.com/)
 
 ## 機能一覧
 
-- サイト内検索
+- 検索機能
 - jamstack
 - パンくずリスト
 - レスポンシブ対応
-- SSG
 
 ## 使用した技術
 
@@ -25,4 +24,7 @@ SSG のブログ
 
 ## その他
 
-Netlify でデプロイしました
+[PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/?hl=JA)という、Google の web サイトの速度を測定するサービスで 99 を頂きました。
+サイトの速度には自信があります。
+![スコア](images/score.png)
+ちなみに Netlify でデプロイしました
