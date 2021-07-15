@@ -33,6 +33,11 @@ const HEAD = (props: Props): JSX.Element => {
         name="google-site-verification"
         content="WfH9eg4kRFDMlJjKCsc_lfBFNuJ-D8Jcvi4LyyumXY0"
       />
+      <script
+        data-ad-client="ca-pub-5525090741154027"
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+      ></script>
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width,initial-scale=1" />
