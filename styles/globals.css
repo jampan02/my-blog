@@ -40,6 +40,9 @@
   .main_contents_container {
     @apply bg-white  mb-20 rounded p-4 xl:p-10;
   }
+  .main_contents_container img {
+    @apply w-full;
+  }
   .main_contents ol li {
     @apply list-decimal;
   }
