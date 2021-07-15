@@ -23,7 +23,7 @@ const BigCategory = ({ contents }: { contents: CategoryProps }) => {
       }に関する投稿一覧`}</p>
       {contents.data.map((content: any) => (
         <Link
-          href="/posts/[category]/[id]"
+          href="/posts/[category]/[miniCatebory]/[id]"
           as={`/posts/${path}/${content.id}`}
           key={`${path}/${content.id}atCategory`}
         >

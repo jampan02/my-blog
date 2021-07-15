@@ -36,10 +36,10 @@ const categoryies = [
           name: "Firebase",
           path: "firebase",
         },
-		{
-			name:"Laravel",
-			path:"laravel"
-		}
+        {
+          name: "Laravel",
+          path: "laravel",
+        },
       ],
     },
   },
@@ -75,7 +75,9 @@ const Sitemap = ({ posts }: { posts: POSTS[] }) => {
                     return (
                       <li key={`${post.id}of${path}atHome`}>
                         <Link
-                          href="/posts/[category]/[id]"
+                          href={`/posts/[category]${
+                            post.categoryPath.length >= 2 && "/[miniCategory]"
+                          }/[id]`}
                           as={`/posts/${path}/${post.id}`}
                         >
                           <a className="sitemap_title">{post.title}</a>
