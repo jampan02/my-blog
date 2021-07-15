@@ -21,7 +21,10 @@ export const ArchiveArea = () => {
         <ul>
           {archives.map((archive) => (
             <li key={`${archive.text}of${archive.href}atArchiveArea`}>
-              <Link href="/archive/[href]" as={`/archive/${archive.href}`}>
+              <Link
+                href="/archive/[year]/[month]"
+                as={`/archive/${archive.href}`}
+              >
                 <a>{archive.text}</a>
               </Link>
             </li>
