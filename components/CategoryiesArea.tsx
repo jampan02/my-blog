@@ -6,6 +6,10 @@ const categories = [
     path: "frontend",
     children: [
       {
+        name: "Javascript",
+        path: "javascript",
+      },
+      {
         name: "React",
         path: "react",
       },
@@ -34,15 +38,15 @@ const categories = [
     ],
   },
   {
-	  name:"インフラ",
-	  path: "infrastructure",
-	  children: [
-		{
-		  name: "Docker",
-		  path: "docker",
-		},
-	  ],
-  }
+    name: "インフラ",
+    path: "infrastructure",
+    children: [
+      {
+        name: "Docker",
+        path: "docker",
+      },
+    ],
+  },
 ];
 
 export const CategoryiesArea = () => {

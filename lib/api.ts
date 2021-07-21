@@ -246,6 +246,9 @@ const getCategory = (english: string) => {
         case "react":
           category = ["フロントエンド", "React"];
           return category;
+        case "javascript":
+          category = ["フロントエンド", "Javascript"];
+          return category;
         case "html":
           category = ["フロントエンド", "HTML"];
           return category;

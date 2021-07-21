@@ -13,6 +13,10 @@ const categoryies = [
       path: "frontend",
       child: [
         {
+          name: "Javascript",
+          path: "javascript",
+        },
+        {
           name: "React",
           path: "react",
         },
