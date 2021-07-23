@@ -35,7 +35,10 @@ const Result = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
           >
             <a>
               <div className="contents_container">
-                <img src={post.image || "/images/posts/ogp/default.jpg"} />
+                <img
+                  src={post.image || "/images/posts/ogp/default.jpg"}
+                  alt={post.title}
+                />
                 <div>
                   <p className="contents_container_title">{post.title}</p>
                   <p className="contents_container_category">

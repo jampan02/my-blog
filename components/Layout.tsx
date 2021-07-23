@@ -16,7 +16,11 @@ const Layout: React.FC<Props> = ({ children }) => {
     <div>
       <header className="bg-blue-200 mb-20 py-10 relative">
         <div className="flex justify-center items-center">
-          <img className="h-8 w-8" src="/images/earth.png" alt="earth" />
+          <img
+            className="h-8 w-8"
+            src="/images/earth.png"
+            alt="サイトアイコン"
+          />
           <span className="text-4xl ml-2 font-bold text-center mb-2 text-gray-700">
             Fronted Code
           </span>

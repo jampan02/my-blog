@@ -47,6 +47,16 @@ const categories = [
       },
     ],
   },
+  {
+    name: "その他",
+    path: "other",
+    children: [
+      {
+        name: "Workout",
+        path: "workout",
+      },
+    ],
+  },
 ];
 
 export const CategoryiesArea = () => {

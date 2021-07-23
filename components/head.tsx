@@ -21,7 +21,6 @@ const HEAD = (props: Props): JSX.Element => {
       "web関連の技術ブログです。フロントエンド中心で、バックエンドちょいちょいのフロントエンドエンジニアになりたい方向けのブログです。Javascript、React、Firebase等を取り扱っております。";
   } else if (image === null) {
     image = "/images/posts/ogp/default.jpg";
-    console.log(image!);
   }
   //urlをつなげる
   url = `https://frontedcode.com/posts/${url}`;
@@ -54,22 +53,29 @@ const HEAD = (props: Props): JSX.Element => {
         ) : (
           <meta name="robots" content="noindex,nofollow"></meta>
         ))}
-      <meta property="og:title" content={title} />
+      {title && (
+        <>
+          <meta property="og:title" content={title} />
+          <meta name="twitter:title" content={title} />
+        </>
+      )}
+      {image && (
+        <>
+          <meta property="og:image" content={image} />
+          <meta name="twitter:image" content={image} />
+        </>
+      )}
+      {keyword && <meta name="keywords" content={keyword} />}
+      <meta property="og:url" content={url} />
+      <link rel="canonical" href={url} />
+      <meta name="twitter:url" content={url} />
       <meta property="og:description" content={description} />
-      <meta name="keywords" content={keyword} />
       <meta name="description" content={description} />
       <meta property="og:type" content="blog" />
-      <meta property="og:url" content={url} />
-      <meta property="og:image" content={image} />
-
       <meta property="og:locale" content="ja_JP" />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content="@tcr_jp" />
-      <meta name="twitter:url" content={image} />
-      <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-      <link rel="canonical" href={url} />
     </Head>
   );
 };

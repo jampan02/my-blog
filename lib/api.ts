@@ -264,7 +264,15 @@ const getCategory = (english: string) => {
           category = ["インフラ", "Docker"];
           return category;
       }
-      category = ["インフラ"];
+      category = ["その他"];
+      return category;
+    case "other":
+      switch (path[1]) {
+        case "workout":
+          category = ["その他", "Workout"];
+          return category;
+      }
+      category = ["その他"];
       return category;
     default:
       return (category = []);

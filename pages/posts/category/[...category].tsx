@@ -29,7 +29,10 @@ const Category = ({ contents }: { contents: CategoryProps }) => {
         >
           <a>
             <div className="contents_container">
-              <img src={content.image || "/images/posts/ogp/default.jpg"} />
+              <img
+                src={content.image || "/images/posts/ogp/default.jpg"}
+                alt={content.title}
+              />
               <div>
                 <p className="contents_container_title">{content.title}</p>
                 <p className="contents_container_date">{content.date} </p>

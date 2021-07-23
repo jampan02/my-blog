@@ -59,6 +59,18 @@ const categoryies = [
       ],
     },
   },
+  {
+    top: {
+      name: "その他",
+      path: "other",
+      child: [
+        {
+          name: "Workout",
+          path: "workout",
+        },
+      ],
+    },
+  },
 ];
 
 const Sitemap = ({ posts }: { posts: POSTS[] }) => {
