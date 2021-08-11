@@ -2,6 +2,11 @@ import path from "path";
 import glob from "glob";
 import fs from "fs";
 import matter from "gray-matter";
+import {
+  GoogleTrentdsAPIContentType,
+  GoogleTrentdsAPIType,
+} from "../types/GoogleTrendsAPIType";
+const gt = require("google-trends-api");
 const postDirPrefix = "content/posts/";
 const DIR = path.join(process.cwd(), "content/posts");
 
@@ -335,4 +340,71 @@ const getMakePath = (items: string[], huga: string) => {
   });
   return allPaths;
   //*二層目までしか対応していない
+};
+
+//トレンド取得
+export const getPopularLibraries = async () => {
+  const now = new Date();
+  const lastWeek = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() - 7
+  );
+  const lastMonth = new Date(
+    now.getFullYear(),
+    now.getMonth() - 1,
+    now.getDate()
+  );
+  const lastYear = new Date(
+    now.getFullYear() - 1,
+    now.getMonth(),
+    now.getDate()
+  );
+  const lastWeekData: GoogleTrentdsAPIContentType = await gt
+    .interestOverTime({
+      keyword: ["React", "Vue", "Angular"],
+      startTime: lastWeek,
+    })
+    .then(function (res: string) {
+      const json: GoogleTrentdsAPIType = JSON.parse(res);
+      const jsonContent = json.default.timelineData;
+      fs.writeFileSync("gt.json", JSON.stringify(json, undefined, 2));
+      return jsonContent;
+    })
+    .catch(function (err: any) {
+      console.log(err);
+    });
+  const lastMonthData: GoogleTrentdsAPIContentType = await gt
+    .interestOverTime({
+      keyword: ["React", "Vue", "Angular"],
+      startTime: lastMonth,
+    })
+    .then(function (res: string) {
+      const json: GoogleTrentdsAPIType = JSON.parse(res);
+      const jsonContent = json.default.timelineData;
+      return jsonContent;
+    })
+    .catch(function (err: any) {
+      console.log(err);
+    });
+  const lastYearData: GoogleTrentdsAPIContentType = await gt
+    .interestOverTime({
+      keyword: ["React", "Vue", "Angular"],
+      startTime: lastYear,
+    })
+    .then(function (res: string) {
+      const json: GoogleTrentdsAPIType = JSON.parse(res);
+      const jsonContent = json.default.timelineData;
+      return jsonContent;
+    })
+    .catch(function (err: any) {
+      console.log(err);
+    });
+  const data = {
+    weekly: lastWeekData,
+    monthly: lastMonthData,
+    yearly: lastYearData,
+  };
+
+  return data;
 };

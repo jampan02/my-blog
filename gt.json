@@ -1,0 +1,131 @@
+{
+  "default": {
+    "timelineData": [
+      {
+        "time": "1627948800",
+        "formattedTime": "Aug 3, 2021",
+        "formattedAxisTime": "Aug 3",
+        "value": [
+          100,
+          86,
+          59
+        ],
+        "hasData": [
+          true,
+          true,
+          true
+        ],
+        "formattedValue": [
+          "100",
+          "86",
+          "59"
+        ]
+      },
+      {
+        "time": "1628035200",
+        "formattedTime": "Aug 4, 2021",
+        "formattedAxisTime": "Aug 4",
+        "value": [
+          97,
+          75,
+          60
+        ],
+        "hasData": [
+          true,
+          true,
+          true
+        ],
+        "formattedValue": [
+          "97",
+          "75",
+          "60"
+        ]
+      },
+      {
+        "time": "1628121600",
+        "formattedTime": "Aug 5, 2021",
+        "formattedAxisTime": "Aug 5",
+        "value": [
+          94,
+          82,
+          55
+        ],
+        "hasData": [
+          true,
+          true,
+          true
+        ],
+        "formattedValue": [
+          "94",
+          "82",
+          "55"
+        ]
+      },
+      {
+        "time": "1628208000",
+        "formattedTime": "Aug 6, 2021",
+        "formattedAxisTime": "Aug 6",
+        "value": [
+          86,
+          83,
+          47
+        ],
+        "hasData": [
+          true,
+          true,
+          true
+        ],
+        "formattedValue": [
+          "86",
+          "83",
+          "47"
+        ]
+      },
+      {
+        "time": "1628294400",
+        "formattedTime": "Aug 7, 2021",
+        "formattedAxisTime": "Aug 7",
+        "value": [
+          60,
+          78,
+          25
+        ],
+        "hasData": [
+          true,
+          true,
+          true
+        ],
+        "formattedValue": [
+          "60",
+          "78",
+          "25"
+        ]
+      },
+      {
+        "time": "1628380800",
+        "formattedTime": "Aug 8, 2021",
+        "formattedAxisTime": "Aug 8",
+        "value": [
+          57,
+          78,
+          26
+        ],
+        "hasData": [
+          true,
+          true,
+          true
+        ],
+        "formattedValue": [
+          "57",
+          "78",
+          "26"
+        ]
+      }
+    ],
+    "averages": [
+      82,
+      80,
+      45
+    ]
+  }
+}
