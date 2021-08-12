@@ -362,7 +362,7 @@ export const getPopularLibraries = async () => {
   );
   const lastWeekData: GoogleTrentdsAPIContentType = await gt
     .interestOverTime({
-      keyword: ["React", "Vue", "Angular"],
+      keyword: ["React.js", "Vue.js", "Angular.js"],
       startTime: lastWeek,
     })
     .then(function (res: string) {
@@ -376,7 +376,7 @@ export const getPopularLibraries = async () => {
     });
   const lastMonthData: GoogleTrentdsAPIContentType = await gt
     .interestOverTime({
-      keyword: ["React", "Vue", "Angular"],
+      keyword: ["React.js", "Vue.js", "Angular.js"],
       startTime: lastMonth,
     })
     .then(function (res: string) {
@@ -389,7 +389,7 @@ export const getPopularLibraries = async () => {
     });
   const lastYearData: GoogleTrentdsAPIContentType = await gt
     .interestOverTime({
-      keyword: ["React", "Vue", "Angular"],
+      keyword: ["React.js", "Vue.js", "Angular.js"],
       startTime: lastYear,
     })
     .then(function (res: string) {
