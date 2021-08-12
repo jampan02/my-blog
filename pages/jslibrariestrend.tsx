@@ -62,7 +62,7 @@ const PopularTech = ({ data }: { data: GoogleTrentdsAPIContentTypeByDate }) => {
     <div className="px-5 mt-8 relative">
       <HEAD title="JSライブラリトレンド" />
       <button
-        onClick={() => router.push("/jslibrariestrend")}
+        onClick={() => router.push("/")}
         className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l absolute -top-5"
       >
         ブログサイトに戻る
