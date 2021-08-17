@@ -56,6 +56,10 @@ const categoryies = [
           name: "Docker",
           path: "docker",
         },
+        {
+          name: "AWS",
+          path: "aws",
+        },
       ],
     },
   },

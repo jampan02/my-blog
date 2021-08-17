@@ -45,6 +45,10 @@ const categories = [
         name: "Docker",
         path: "docker",
       },
+      {
+        name: "AWS",
+        path: "aws",
+      },
     ],
   },
   {

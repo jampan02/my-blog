@@ -268,6 +268,9 @@ const getCategory = (english: string) => {
         case "docker":
           category = ["インフラ", "Docker"];
           return category;
+        case "aws":
+          category = ["インフラ", "AWS"];
+          return category;
       }
       category = ["その他"];
       return category;
