@@ -2,130 +2,110 @@
   "default": {
     "timelineData": [
       {
-        "time": "1627948800",
-        "formattedTime": "Aug 3, 2021",
-        "formattedAxisTime": "Aug 3",
+        "time": "1632441600",
+        "formattedTime": "Sep 24, 2021",
+        "formattedAxisTime": "Sep 24",
         "value": [
+          22,
+          54,
+          11
+        ],
+        "hasData": [
+          true,
+          true,
+          true
+        ],
+        "formattedValue": [
+          "22",
+          "54",
+          "11"
+        ]
+      },
+      {
+        "time": "1632528000",
+        "formattedTime": "Sep 25, 2021",
+        "formattedAxisTime": "Sep 25",
+        "value": [
+          0,
+          12,
+          0
+        ],
+        "hasData": [
+          false,
+          true,
+          false
+        ],
+        "formattedValue": [
+          "0",
+          "12",
+          "0"
+        ]
+      },
+      {
+        "time": "1632614400",
+        "formattedTime": "Sep 26, 2021",
+        "formattedAxisTime": "Sep 26",
+        "value": [
+          0,
+          35,
+          0
+        ],
+        "hasData": [
+          false,
+          true,
+          false
+        ],
+        "formattedValue": [
+          "0",
+          "35",
+          "0"
+        ]
+      },
+      {
+        "time": "1632700800",
+        "formattedTime": "Sep 27, 2021",
+        "formattedAxisTime": "Sep 27",
+        "value": [
+          52,
+          31,
+          0
+        ],
+        "hasData": [
+          true,
+          true,
+          false
+        ],
+        "formattedValue": [
+          "52",
+          "31",
+          "0"
+        ]
+      },
+      {
+        "time": "1632787200",
+        "formattedTime": "Sep 28, 2021",
+        "formattedAxisTime": "Sep 28",
+        "value": [
+          20,
           100,
-          86,
-          59
+          0
         ],
         "hasData": [
           true,
           true,
-          true
+          false
         ],
         "formattedValue": [
+          "20",
           "100",
-          "86",
-          "59"
-        ]
-      },
-      {
-        "time": "1628035200",
-        "formattedTime": "Aug 4, 2021",
-        "formattedAxisTime": "Aug 4",
-        "value": [
-          97,
-          75,
-          60
-        ],
-        "hasData": [
-          true,
-          true,
-          true
-        ],
-        "formattedValue": [
-          "97",
-          "75",
-          "60"
-        ]
-      },
-      {
-        "time": "1628121600",
-        "formattedTime": "Aug 5, 2021",
-        "formattedAxisTime": "Aug 5",
-        "value": [
-          94,
-          82,
-          55
-        ],
-        "hasData": [
-          true,
-          true,
-          true
-        ],
-        "formattedValue": [
-          "94",
-          "82",
-          "55"
-        ]
-      },
-      {
-        "time": "1628208000",
-        "formattedTime": "Aug 6, 2021",
-        "formattedAxisTime": "Aug 6",
-        "value": [
-          86,
-          83,
-          47
-        ],
-        "hasData": [
-          true,
-          true,
-          true
-        ],
-        "formattedValue": [
-          "86",
-          "83",
-          "47"
-        ]
-      },
-      {
-        "time": "1628294400",
-        "formattedTime": "Aug 7, 2021",
-        "formattedAxisTime": "Aug 7",
-        "value": [
-          60,
-          78,
-          25
-        ],
-        "hasData": [
-          true,
-          true,
-          true
-        ],
-        "formattedValue": [
-          "60",
-          "78",
-          "25"
-        ]
-      },
-      {
-        "time": "1628380800",
-        "formattedTime": "Aug 8, 2021",
-        "formattedAxisTime": "Aug 8",
-        "value": [
-          57,
-          78,
-          26
-        ],
-        "hasData": [
-          true,
-          true,
-          true
-        ],
-        "formattedValue": [
-          "57",
-          "78",
-          "26"
+          "0"
         ]
       }
     ],
     "averages": [
-      82,
-      80,
-      45
+      19,
+      46,
+      2
     ]
   }
 }

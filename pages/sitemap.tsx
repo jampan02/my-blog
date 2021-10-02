@@ -1,10 +1,11 @@
 import React from "react";
 import HEAD from "../components/head";
 import Layout from "../components/Layout";
-import { getPosts, POSTS } from "../lib/api";
+import { getAllPosts } from "../lib/api";
 import Link from "next/link";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { POST } from "../types/BlogAPIType";
 
 const categoryies = [
   {
@@ -76,8 +77,10 @@ const categoryies = [
     },
   },
 ];
-
-const Sitemap = ({ posts }: { posts: POSTS[] }) => {
+type Props = {
+  posts: POST[];
+};
+const Sitemap: React.FC<Props> = ({ posts }) => {
   return (
     <Layout>
       <HEAD title="サイトマップ" />
@@ -88,16 +91,14 @@ const Sitemap = ({ posts }: { posts: POSTS[] }) => {
               {category.top.name}
             </p>
             <ul className="ml-12 relative">
-              {posts.map((post) => {
+              {posts.map((post, i) => {
                 const path = post.categoryPath.join("/");
                 if (category.top.path === post.categoryPath[0]) {
                   if (post.categoryPath.length === 1) {
                     return (
-                      <li key={`${post.id}of${path}atHome`}>
+                      <li key={i}>
                         <Link
-                          href={`/posts/[category]${
-                            post.categoryPath.length >= 2 && "/[miniCategory]"
-                          }/[id]`}
+                          href={`/posts/[category]/[miniCategory]/[id]`}
                           as={`/posts/${path}/${post.id}`}
                         >
                           <a className="sitemap_title">{post.title}</a>
@@ -118,7 +119,7 @@ const Sitemap = ({ posts }: { posts: POSTS[] }) => {
                     <span className="absolute h-3 w-3 -left-6">
                       <FontAwesomeIcon icon={faAngleRight} />
                     </span>
-                    {posts.map((post) => {
+                    {posts.map((post, i) => {
                       const path = post.categoryPath.join("/");
                       if (category.top.path === post.categoryPath[0]) {
                         if (
@@ -126,7 +127,7 @@ const Sitemap = ({ posts }: { posts: POSTS[] }) => {
                           post.categoryPath[post.categoryPath.length - 1]
                         ) {
                           return (
-                            <li key={`${post.id}of${path}atHome`}>
+                            <li key={i}>
                               <Link
                                 href="/posts/[category]/[id]"
                                 as={`/posts/${path}/${post.id}`}
@@ -153,6 +154,6 @@ const Sitemap = ({ posts }: { posts: POSTS[] }) => {
 export default Sitemap;
 
 export const getStaticProps = async () => {
-  const posts = getPosts();
+  const posts = await getAllPosts();
   return { props: { posts } };
 };

@@ -1,45 +1,36 @@
 import { GetStaticPaths } from "next";
 import {
-  CategoryProps,
-  getAllPosts,
-  getPostsByCategory,
+  getPostsInsideBigCategory,
+  getSameCategoryPosts,
 } from "../../../lib/api";
 import Layout from "../../../components/Layout";
-import Link from "next/link";
+import PostThread from "../../../components/PostThread";
 import HEAD from "../../../components/head";
-
-const Category = ({ contents }: { contents: CategoryProps }) => {
-  let path = contents.categoryPath.join("/");
-
+import { CategoryProps } from "../../../types/BlogAPIType";
+import { getCategoryPaths } from "../../../firebase/nodeFunctions";
+type Props = {
+  posts: CategoryProps;
+};
+const Category: React.FC<Props> = ({ posts }) => {
   return (
     <Layout>
       <HEAD
-        title={`${
-          contents.category[contents.category.length - 1]
-        }に関する投稿一覧`}
+        title={`${posts.category[posts.category.length - 1]}に関する投稿一覧`}
       />
-      <p className="contents_header">{`${
-        contents.category[contents.category.length - 1]
+      <p className="posts_header">{`${
+        posts.category[posts.category.length - 1]
       }に関する投稿一覧`}</p>
-      {contents.data.map((content: any) => (
-        <Link
-          href="/posts/[category]/[miniCatebory]/[id]"
-          as={`/posts/${path}/${content.id}`}
-          key={`${path}/${content.id}atCategory`}
-        >
-          <a>
-            <div className="contents_container">
-              <img
-                src={content.image || "/images/posts/ogp/default.jpg"}
-                alt={content.title}
-              />
-              <div>
-                <p className="contents_container_title">{content.title}</p>
-                <p className="contents_container_date">{content.date} </p>
-              </div>
-            </div>
-          </a>
-        </Link>
+      {posts.data.map((post, i) => (
+        <PostThread
+          post={{
+            ...post,
+            category: posts.category,
+            categoryPath: post.categoryPath
+              ? post.categoryPath
+              : posts.categoryPath,
+          }}
+          key={i}
+        />
       ))}
     </Layout>
   );
@@ -51,28 +42,38 @@ export const getStaticProps = async ({
 }: {
   params: { category: string[] };
 }) => {
-  console.log(params);
-  const contents = getPostsByCategory(params.category);
-  console.log("contents=", contents);
-  return {
-    props: {
-      contents,
-    },
-  };
+  const category = params.category;
+  let posts;
+  if (category.length === 1) {
+    // [frontednd]みたいなとき
+    posts = await getPostsInsideBigCategory(params.category);
+  } else {
+    // [frontend,javascript]みたいなとき（２個以上）
+    posts = await getSameCategoryPosts(params.category);
+  }
+
+  if (posts) {
+    return {
+      props: {
+        posts,
+      },
+    };
+  }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = getAllPosts();
-  console.log(posts);
-  //カテゴリー名をgetStaticPropsに渡す
-  const paths = posts.map((post) => {
-    post.pop();
-    return {
-      params: {
-        category: post,
-      },
-    };
-  });
+  const allpaths = await getCategoryPaths();
 
-  return { paths: paths, fallback: false };
+  //カテゴリー名をgetStaticPropsに渡す
+  const paths =
+    allpaths &&
+    allpaths.map((post) => {
+      return {
+        params: {
+          category: post,
+        },
+      };
+    });
+
+  return { paths: paths || [], fallback: false };
 };

@@ -1,220 +1,125 @@
-import path from "path";
-import glob from "glob";
 import fs from "fs";
 import matter from "gray-matter";
 import {
   GoogleTrentdsAPIContentType,
   GoogleTrentdsAPIType,
 } from "../types/GoogleTrendsAPIType";
+import { DetailContent, CategoryProps, POST } from "../types/BlogAPIType";
+import {
+  getArticleText,
+  getChildPostPaths,
+  getFilePaths,
+  getFilePathsArray,
+} from "../firebase/nodeFunctions";
 const gt = require("google-trends-api");
-const postDirPrefix = "content/posts/";
-const DIR = path.join(process.cwd(), "content/posts");
 
-export const getAllPosts = () => {
-  const fileNamePath = glob.sync(`${postDirPrefix}/**/*.md`);
-  const fileName = fileNamePath
-    .map((file) => file.split(postDirPrefix).pop())
-    .map((slug) => String(slug).replace(/\.md$/, "").split("/"));
-  return fileName;
-};
-
-export type DetailContent = {
-  title: any;
-  description: any;
-  keyword: any;
-  image: any;
-  url: any;
-  category: string[];
-  content: string;
-  date: string;
-  categoryPath: string[];
-  id: string;
-};
-
-export const getPostBySlug = (slugArray: string[]) => {
+export const getPostBySlug = async (slugArray: string[]) => {
   //"tex/sdfs"こんなんにする
   const id = slugArray[slugArray.length - 1];
   const slugPath = slugArray.join("/");
-  const slugFullPath = path.join(DIR, `/${slugPath}.md`);
-  const fileContent = fs.readFileSync(slugFullPath, "utf8");
-  const { data, content } = matter(fileContent);
-  const date = getDate(data["date"]);
-  const title = data["title"];
-  const description = data["description"];
-  const keyword = data["keyword"];
-  const image = data["image"];
-  const url = data["url"];
-  const categoryPath = slugArray;
-  slugArray.pop();
-  const categoryInEnglish = slugArray.join("/");
-  const category = getCategory(categoryInEnglish);
-  const items: DetailContent = {
-    title,
-    description,
-    keyword,
-    image,
-    url,
-    category,
-    content,
-    date,
-    categoryPath,
-    id,
-  };
-
-  return items;
-};
-
-export type CategoryProps = {
-  data: {
-    title: string;
-    date: string;
-    id: string;
-    image: string;
-  }[];
-  category: string[];
-  categoryPath: string[];
-};
-
-//カテゴリ内投稿取得関数
-export const getPostsByCategory = (slugs: string[]) => {
-  let category: string;
-  if (Array.isArray(slugs)) {
-    //配列だったら
-
-    category = slugs.join("/");
-  } else {
-    category = slugs;
-  }
-
-  let items: CategoryProps = { data: [], category: [], categoryPath: [] };
-  const categoryPath = path.join(DIR, `/${category}/`);
-
-  const allNames = fs.readdirSync(categoryPath);
-
-  const results = getMakePath(allNames, category) as string[];
-  const realCategory = getCategory(category);
-  for (let i = 0; i < results.length; i++) {
-    const fileContent = fs.readFileSync(
-      `${categoryPath}${results[i]}`,
-      "utf-8"
-    );
-    const { data } = matter(fileContent);
+  const fileContent = await getArticleText(slugPath);
+  if (fileContent) {
+    const { data, content } = matter(fileContent);
     const date = getDate(data["date"]);
     const title = data["title"];
+    const description = data["description"];
+    const keyword = data["keyword"];
     const image = data["image"];
-    const id = results[i].replace(/\.md$/, "");
-
-    items.data.push({
+    const url = data["url"];
+    const categoryPath = slugArray;
+    slugArray.pop();
+    const categoryInEnglish = slugArray.join("/");
+    const category = getCategory(categoryInEnglish);
+    const items: DetailContent = {
       title,
+      description,
+      keyword,
       image,
+      url,
+      category,
+      content,
       date,
+      categoryPath,
       id,
-    });
-  }
-  items.category = realCategory;
-  //tech/pro >> ["tech","pro"]の形にする
-  items.categoryPath = category.split("/");
-  //日付ごとにソート
-  items.data.sort(function (a, b) {
-    if (a.date > b.date) {
-      return -1;
-    } else {
-      return 1;
-    }
-  });
-
-  return items;
-};
-
-export type POSTS = {
-  title: string;
-  image: string;
-  category: string[];
-  date: string;
-  id: string;
-  categoryPath: string[];
-};
-//全件取得
-export const getPosts = () => {
-  let items: POSTS[] = [];
-  let allPostsData: DetailContent[] = [];
-  const postNames = getAllPosts();
-  //全投稿取得
-  allPostsData = postNames.map((names) => {
-    return getPostBySlug(names);
-  });
-  items = allPostsData.map((postData) => {
-    return {
-      title: postData.title,
-      category: postData.category,
-      date: postData.date,
-      image: postData.image,
-      id: postData.id,
-      categoryPath: postData.categoryPath,
     };
-  });
-  items.sort(function (a, b) {
-    if (a.date > b.date) {
-      return -1;
-    } else {
-      return 1;
-    }
-  });
-  console.log(items);
-  return items;
+
+    return items;
+  }
 };
-
-//返り血は、[[2020,3]]　みたいな感じ
-
 //
-export const getDatesPath = () => {
+export const getDatesPath = async () => {
   let allPostsData = [];
-  const postNames = getAllPosts();
+  const postNames = await getFilePathsArray();
   //全投稿取得
-  allPostsData = postNames.map((names) => {
-    return getDatePath(names);
-  });
+  if (postNames) {
+    allPostsData = await postNames.map(async (names) => {
+      const result = await getDatePath(names);
+      return result;
+    });
 
-  return allPostsData;
+    const results = [];
+    for (let i = 0; i <= allPostsData.length; i++) {
+      //全ての投稿全部展開させる
+      const data = await allPostsData[i];
+      if (data) {
+        results.push(data);
+      }
+    }
+    return results;
+  }
 };
 
 //月ごとのアーカイブ取得
-export const getPostsByDate = (date: string[]) => {
+export const getPostsByDate = async (date: string[]) => {
   const start = date[0];
   const end = date[date.length - 1];
-  let items: POSTS[] = [];
-  let allPostsData: DetailContent[] = [];
+  let items: POST[] = [];
+  let allPostsData: DetailContent[] | undefined = [];
   const regexp = new RegExp(`^${start}/${end}+`);
-  const postNames = getAllPosts();
+  const postNames = await getFilePathsArray();
   //全投稿取得
-  allPostsData = postNames.map((names) => {
-    return getPostBySlug(names);
-  });
-  items = allPostsData.map((postData) => {
-    return {
-      title: postData.title,
-      image: postData.image,
-      category: postData.category,
-      date: postData.date,
-      id: postData.id,
-      categoryPath: postData.categoryPath,
-    };
-  });
+  if (postNames) {
+    const promisedAllPostsData = await postNames.map(async (names) => {
+      const data = await getPostBySlug(names);
 
-  items = items.filter((item) => {
-    const result = item.date.match(regexp);
-    return Boolean(result);
-  });
-
-  items.sort(function (a, b) {
-    if (a.date > b.date) {
-      return -1;
-    } else {
-      return 1;
+      return data;
+    });
+    for (let i = 0; i <= promisedAllPostsData.length; i++) {
+      //全ての投稿全部展開させる
+      const data = await promisedAllPostsData[i];
+      if (data) {
+        allPostsData.push(data);
+      }
     }
-  });
 
-  return { items, date };
+    if (allPostsData) {
+      items = allPostsData.map((postData) => {
+        return {
+          title: postData.title,
+          image: postData.image,
+          category: postData.category,
+          date: postData.date,
+          id: postData.id,
+          categoryPath: postData.categoryPath,
+        };
+      });
+
+      items = items.filter((item) => {
+        const result = item.date.match(regexp);
+        return Boolean(result);
+      });
+
+      items.sort(function (a, b) {
+        if (a.date > b.date) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+
+      return { items, date };
+    }
+  }
 };
 
 //日付取得関数
@@ -287,62 +192,17 @@ const getCategory = (english: string) => {
   }
 };
 
-const getDatePath = (slugArray: string[]) => {
+const getDatePath = async (slugArray: string[]) => {
   const slugPath = slugArray.join("/");
-  const slugFullPath = path.join(DIR, `/${slugPath}.md`);
-  const fileContent = fs.readFileSync(slugFullPath, "utf8");
-  const { data } = matter(fileContent);
-  const date = data["date"];
+  const fileContent = await getArticleText(slugPath);
+  if (fileContent) {
+    const { data } = await matter(fileContent);
+    const date = data["date"];
 
-  let year = date.getFullYear();
-  let month = (date.getMonth() < 9 ? "0" : "") + (date.getMonth() + 1);
-  return [String(year), month as string];
-};
-
-const getMakePath = (items: string[], huga: string) => {
-  //カテゴリ取得
-  const pattern = /\.md$/;
-  let folders: string[] = [];
-  const defaultPaths = items.map((name) => {
-    //フォルダだった場合
-    if (!pattern.test(name)) {
-      folders.push(name);
-      return;
-    } else {
-      return name;
-    }
-  });
-  //二層目
-  const paths = folders.map((name) => {
-    const fullPath = path.join(DIR, `/${huga}/${name}/`);
-    const fileNames = fs.readdirSync(fullPath);
-    return fileNames.map((fileName) => {
-      return `${name}/${fileName}`;
-    });
-  });
-
-  let array1d = [];
-  for (let array of paths) {
-    for (let result of array) {
-      array1d.push(result);
-    }
+    let year = date.getFullYear();
+    let month = (date.getMonth() < 9 ? "0" : "") + (date.getMonth() + 1);
+    return [String(year), month as string];
   }
-  const results = array1d.map((data) => {
-    //フォルダだった場合
-    if (!pattern.test(data)) {
-      folders.push(data);
-      return;
-    }
-    return data;
-  });
-
-  const hoge = defaultPaths.concat(results as string[]);
-
-  const allPaths = hoge.filter((item) => {
-    return item !== undefined;
-  });
-  return allPaths;
-  //*二層目までしか対応していない
 };
 
 //トレンド取得
@@ -410,4 +270,209 @@ export const getPopularLibraries = async () => {
   };
 
   return data;
+};
+function baseName(str: string) {
+  var base = new String(str).substring(str.lastIndexOf("/") + 1);
+  if (base.lastIndexOf(".") != -1)
+    base = base.substring(0, base.lastIndexOf("."));
+  return base;
+}
+export const getPostContent = async (slug: string) => {
+  const basename = baseName(slug);
+
+  const articleText = await getArticleText(slug);
+
+  if (articleText) {
+    const { data, content } = await matter(articleText);
+    const date = getDate(data["date"]);
+    const title = data["title"];
+
+    const description = data["description"];
+    const keyword = data["keyword"];
+    const image = data["image"];
+    const url = data["url"];
+    const categoryPath = slug.split("/");
+    categoryPath[categoryPath.length - 1] = basename;
+    categoryPath.shift();
+    const id = categoryPath[categoryPath.length - 1];
+    const english = slug.split("/");
+    english.pop();
+    english.shift();
+    const categoryInEnglish = english.join("/");
+
+    const category = await getCategory(categoryInEnglish);
+
+    const items: DetailContent = {
+      title,
+      description,
+      keyword,
+      image,
+      url,
+      category,
+      content,
+      date,
+      categoryPath,
+      id,
+    };
+
+    return items;
+  }
+};
+export const getAllPosts = async () => {
+  const postNames = await getFilePaths();
+  //全投稿取得
+
+  if (postNames) {
+    const allPostsData = await postNames.map(async (names) => {
+      const c = await getPostContent(names);
+
+      return c;
+    });
+
+    if (allPostsData) {
+      for (let i = 0; i <= allPostsData.length; i++) {
+        //全ての投稿全部展開させる
+        await allPostsData[i];
+      }
+
+      let items: POST[] = [];
+      await allPostsData.map(async (postData) => {
+        const g = await postData;
+        g?.categoryPath.pop();
+        if (g) {
+          items.push({
+            title: String(g.title),
+            category: g.category,
+            date: g.date,
+            image: String(g.image),
+            categoryPath: g.categoryPath,
+            id: g.id,
+          });
+        }
+      });
+
+      items.sort(function (a, b) {
+        if (a.date > b.date) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+
+      return items;
+    }
+  }
+};
+
+//同類投稿取得
+export const getSameCategoryPosts = async (slugs: string[]) => {
+  const category = slugs.join("/");
+  const childPostPaths = await getChildPostPaths(slugs);
+
+  let items: CategoryProps = { data: [], category: [], categoryPath: [] };
+  const realCategory = getCategory(category);
+
+  if (childPostPaths) {
+    const datas = await childPostPaths.map(async (path) => {
+      const pathArray = path.split("/");
+      pathArray.pop();
+      pathArray.shift();
+      const articleText = await getArticleText(path);
+
+      if (articleText) {
+        const { data } = await matter(articleText);
+        const date = getDate(data["date"]);
+        const title = data["title"];
+
+        const image = data["image"];
+
+        let idArray = path.split("/");
+        const id = idArray[idArray.length - 1].replace(/\.md$/, "");
+        return await {
+          title,
+          image,
+          date,
+          id,
+        };
+      }
+    });
+
+    for (let i = 0; i <= datas.length; i++) {
+      //全ての投稿全部展開させる
+      const data = await datas[i];
+      if (data) {
+        items.data.push(data);
+      }
+    }
+
+    items.category = realCategory;
+    //tech/pro >> ["tech","pro"]の形にする
+    items.categoryPath = slugs;
+    //日付ごとにソート
+    items.data.sort(function (a, b) {
+      if (a.date > b.date) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    return items;
+  }
+};
+
+export const getPostsInsideBigCategory = async (slugs: string[]) => {
+  const childPostPaths = await getChildPostPaths(slugs);
+
+  if (childPostPaths) {
+    let items = await childPostPaths.map(async (path) => {
+      const articleText = await getArticleText(path);
+
+      if (articleText) {
+        const { data } = await matter(articleText);
+        const date = getDate(data["date"]);
+        const title = String(data["title"]);
+
+        const image = String(data["image"]);
+
+        //const categoryPath = path.split("/");
+        const categoryPath = path
+          .split("/")
+          .slice(1, path.split("/").length - 1);
+        const category = getCategory(categoryPath.join("/"));
+        let idArray = path.split("/");
+        const id = idArray[idArray.length - 1].replace(/\.md$/, "");
+        return {
+          title,
+          image,
+          date,
+          id,
+          categoryPath,
+          category,
+        };
+      }
+    });
+    const category = slugs.join("/");
+    let result: CategoryProps = { data: [], category: [], categoryPath: [] };
+    const realCategory = getCategory(category);
+    result.category = realCategory;
+    //tech/pro >> ["tech","pro"]の形にする
+    result.categoryPath = slugs;
+    for (let i = 0; i <= items.length; i++) {
+      //全ての投稿全部展開させる
+      const data = await items[i];
+      if (data) {
+        result.data.push(data);
+      }
+    }
+    result.data.sort(function (a, b) {
+      if (a.date > b.date) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    return result;
+  }
 };

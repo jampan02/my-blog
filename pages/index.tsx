@@ -1,54 +1,19 @@
-import Link from "next/link";
 import Layout from "../components/Layout";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { getPosts } from "../lib/api";
+import { GetStaticProps } from "next";
+import { getAllPosts } from "../lib/api";
 import HEAD from "../components/head";
-
-type POSTS = {
-  title: string;
-  image: string;
-  category: string[];
-  date: string;
-  id: string;
-  categoryPath: string[];
+import { POST } from "../types/BlogAPIType";
+import PostThread from "../components/PostThread";
+type Props = {
+  posts: POST[];
 };
-
-const IndexPage = ({
-  posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const IndexPage: React.FC<Props> = ({ posts }) => {
   return (
     <Layout>
       <HEAD />
       <p className="contents_header">最近の投稿一覧</p>
-      {posts.map((post: POSTS) => {
-        const path = post.categoryPath.join("/");
-
-        return (
-          <div key={`${post.id}of${path}atHome`}>
-            <Link
-              href={`/posts/[category]${
-                post.categoryPath.length >= 2 && "/[miniCategory]"
-              }/[id]`}
-              as={`/posts/${path}/${post.id}`}
-            >
-              <a data-testId={post.title}>
-                <div className="contents_container">
-                  <img
-                    src={post.image || "/images/posts/ogp/default.jpg"}
-                    alt={post.title}
-                  />
-                  <div>
-                    <p className="contents_container_title">{post.title}</p>
-                    <p className="contents_container_category">
-                      {post.category[post.category.length - 1]}
-                    </p>
-                    <p className="contents_container_date">{post.date} </p>
-                  </div>
-                </div>
-              </a>
-            </Link>
-          </div>
-        );
+      {posts.map((post: POST, i) => {
+        return <PostThread post={post} key={i} />;
       })}
     </Layout>
   );
@@ -57,7 +22,8 @@ const IndexPage = ({
 export default IndexPage;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getPosts();
+  const posts = await getAllPosts();
+
   return {
     props: {
       posts,

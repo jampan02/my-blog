@@ -1,17 +1,20 @@
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
-import { useEffect, useState } from "react";
-import { getPosts, POSTS } from "../../lib/api";
-import Link from "next/link";
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import React, { useEffect, useState } from "react";
+import { getAllPosts } from "../../lib/api";
+import { GetStaticProps } from "next";
 import HEAD from "../../components/head";
-
-const Result = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const [resutls, setResults] = useState<POSTS[]>([]);
+import { POST } from "../../types/BlogAPIType";
+import PostThread from "../../components/PostThread";
+type Props = {
+  posts: POST[];
+};
+const Result: React.FC<Props> = ({ posts }) => {
+  const [resutls, setResults] = useState<POST[]>([]);
   const router = useRouter();
-  const { s } = router.query;
+  const { s = "" } = router.query;
   useEffect(() => {
-    const items = posts.filter((post: POSTS) => {
+    const items = posts.filter((post: POST) => {
       const title = post.title;
       const result = title.indexOf(s as string);
       if (!(result === -1)) {
@@ -25,31 +28,8 @@ const Result = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
     <Layout>
       <HEAD title={`"${s}"を含む投稿一覧`} noIndex={true} isFollow={false} />
       <p className="contents_header">{`"${s}"を含む投稿一覧`}</p>
-      {resutls.map((post: POSTS) => {
-        const path = post.categoryPath.join("/");
-        return (
-          <Link
-            href="/posts/[category]/[miniCategory]/[id]"
-            as={`/posts/${path}/${post.id}`}
-            key={`${post.id}of${path}atResult`}
-          >
-            <a>
-              <div className="contents_container">
-                <img
-                  src={post.image || "/images/posts/ogp/default.jpg"}
-                  alt={post.title}
-                />
-                <div>
-                  <p className="contents_container_title">{post.title}</p>
-                  <p className="contents_container_category">
-                    {post.category[post.category.length - 1]}
-                  </p>
-                  <p className="contents_container_date">{post.date} </p>
-                </div>
-              </div>
-            </a>
-          </Link>
-        );
+      {resutls.map((post: POST, i) => {
+        return <PostThread post={post} key={i} />;
       })}
     </Layout>
   );
@@ -57,10 +37,11 @@ const Result = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
 export default Result;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getPosts();
+  const posts = await getAllPosts();
+
   return {
     props: {
-      posts,
+      posts: posts,
     },
   };
 };
