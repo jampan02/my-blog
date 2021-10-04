@@ -86,7 +86,7 @@ const PopularTech = ({ data }: { data: GoogleTrentdsAPIContentTypeByDate }) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const data = await getPopularLibraries();
 
   return { props: { data } };

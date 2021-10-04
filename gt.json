@@ -2,72 +2,12 @@
   "default": {
     "timelineData": [
       {
-        "time": "1632441600",
-        "formattedTime": "Sep 24, 2021",
-        "formattedAxisTime": "Sep 24",
-        "value": [
-          22,
-          54,
-          11
-        ],
-        "hasData": [
-          true,
-          true,
-          true
-        ],
-        "formattedValue": [
-          "22",
-          "54",
-          "11"
-        ]
-      },
-      {
-        "time": "1632528000",
-        "formattedTime": "Sep 25, 2021",
-        "formattedAxisTime": "Sep 25",
-        "value": [
-          0,
-          12,
-          0
-        ],
-        "hasData": [
-          false,
-          true,
-          false
-        ],
-        "formattedValue": [
-          "0",
-          "12",
-          "0"
-        ]
-      },
-      {
-        "time": "1632614400",
-        "formattedTime": "Sep 26, 2021",
-        "formattedAxisTime": "Sep 26",
-        "value": [
-          0,
-          35,
-          0
-        ],
-        "hasData": [
-          false,
-          true,
-          false
-        ],
-        "formattedValue": [
-          "0",
-          "35",
-          "0"
-        ]
-      },
-      {
         "time": "1632700800",
         "formattedTime": "Sep 27, 2021",
         "formattedAxisTime": "Sep 27",
         "value": [
-          52,
-          31,
+          25,
+          33,
           0
         ],
         "hasData": [
@@ -76,8 +16,8 @@
           false
         ],
         "formattedValue": [
-          "52",
-          "31",
+          "25",
+          "33",
           "0"
         ]
       },
@@ -86,7 +26,47 @@
         "formattedTime": "Sep 28, 2021",
         "formattedAxisTime": "Sep 28",
         "value": [
-          20,
+          33,
+          81,
+          0
+        ],
+        "hasData": [
+          true,
+          true,
+          false
+        ],
+        "formattedValue": [
+          "33",
+          "81",
+          "0"
+        ]
+      },
+      {
+        "time": "1632873600",
+        "formattedTime": "Sep 29, 2021",
+        "formattedAxisTime": "Sep 29",
+        "value": [
+          24,
+          41,
+          0
+        ],
+        "hasData": [
+          true,
+          true,
+          false
+        ],
+        "formattedValue": [
+          "24",
+          "41",
+          "0"
+        ]
+      },
+      {
+        "time": "1632960000",
+        "formattedTime": "Sep 30, 2021",
+        "formattedAxisTime": "Sep 30",
+        "value": [
+          42,
           100,
           0
         ],
@@ -96,16 +76,56 @@
           false
         ],
         "formattedValue": [
-          "20",
+          "42",
           "100",
+          "0"
+        ]
+      },
+      {
+        "time": "1633046400",
+        "formattedTime": "Oct 1, 2021",
+        "formattedAxisTime": "Oct 1",
+        "value": [
+          17,
+          78,
+          9
+        ],
+        "hasData": [
+          true,
+          true,
+          true
+        ],
+        "formattedValue": [
+          "17",
+          "78",
+          "9"
+        ]
+      },
+      {
+        "time": "1633132800",
+        "formattedTime": "Oct 2, 2021",
+        "formattedAxisTime": "Oct 2",
+        "value": [
+          28,
+          19,
+          0
+        ],
+        "hasData": [
+          true,
+          true,
+          false
+        ],
+        "formattedValue": [
+          "28",
+          "19",
           "0"
         ]
       }
     ],
     "averages": [
-      19,
-      46,
-      2
+      28,
+      59,
+      1
     ]
   }
 }
