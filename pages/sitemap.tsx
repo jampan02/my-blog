@@ -129,7 +129,9 @@ const Sitemap: React.FC<Props> = ({ posts }) => {
                           return (
                             <li key={i}>
                               <Link
-                                href="/posts/[category]/[id]"
+                                   href={`/posts/[category]${
+									post.categoryPath.length >= 2 && "/[miniCategory]"
+								  }/[id]`}
                                 as={`/posts/${path}/${post.id}`}
                               >
                                 <a className="sitemap_title">{post.title}</a>
