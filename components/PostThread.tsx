@@ -20,8 +20,9 @@ const PostThread: React.FC<Props> = ({ post }) => {
           <div className="contents_container">
             <img
               src={
-                post.image ||
-                "https://firebasestorage.googleapis.com/v0/b/frontedcode-22c73.appspot.com/o/default%2Fdefault.jpg?alt=media&token=a9a2d40a-63d7-430e-b65d-7d8a2b22ca14"
+                post.image !== "null"
+                  ? post.image
+                  : "https://firebasestorage.googleapis.com/v0/b/frontedcode-22c73.appspot.com/o/default%2Fdefault.jpg?alt=media&token=a9a2d40a-63d7-430e-b65d-7d8a2b22ca14"
               }
               alt={post.title}
             />
