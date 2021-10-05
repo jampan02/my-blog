@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import HEAD from "../components/head";
 import { GoogleTrentdsAPIContentTypeByDate } from "../types/GoogleTrendsAPIType";
 import { useRouter } from "next/router";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 
 type DateType = "weekly" | "monthly" | "yearly";
 
@@ -87,7 +87,7 @@ const PopularTech = ({ data }: { data: GoogleTrentdsAPIContentTypeByDate }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const data = await getPopularLibraries();
 
   return { props: { data } };
