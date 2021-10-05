@@ -17,6 +17,10 @@ SSG ブログサイトです。
 - Typescript
 - React
   - Next.js
+- Firebase
+  - Authentication
+  - Cloud Storage
+  - Cloud Functions
 - Tailwind
 - Test
   - Jest
