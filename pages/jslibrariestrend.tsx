@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import HEAD from "../components/head";
 import { GoogleTrentdsAPIContentTypeByDate } from "../types/GoogleTrendsAPIType";
 import { useRouter } from "next/router";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 
 type DateType = "weekly" | "monthly" | "yearly";
 
