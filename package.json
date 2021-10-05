@@ -38,6 +38,7 @@
     "grob": "^1.0.0",
     "msw": "^0.27.1",
     "next": "latest",
+    "next-on-netlify": "^3.0.1",
     "next-page-tester": "^0.24.0",
     "next-sitemap": "^1.5.16",
     "react": "^16.12.0",
