@@ -86,10 +86,10 @@ const PopularTech = ({ data }: { data: GoogleTrentdsAPIContentTypeByDate }) => {
   );
 };
 
-export async function getInitialProps() {
+PopularTech.getInitialProps = async () => {
   const data = await getPopularLibraries();
 
-  return { props: { data } };
-}
+  return { data };
+};
 
 export default PopularTech;
